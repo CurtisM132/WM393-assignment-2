@@ -1,0 +1,15 @@
+.home-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    /* flex-direction: row; */
+}
+
+.home-card {
+    width: 200px;
+    height: 250px;
+
+    margin: 25px;
+
+    background-color: #F0F0F0;
+}
