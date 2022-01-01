@@ -9,6 +9,9 @@ export class HomePageComponent implements OnInit {
 
   constructor() { }
 
+  // TODO: Use authentication system
+  public authenticated = true;
+
   ngOnInit(): void {
   }
 
