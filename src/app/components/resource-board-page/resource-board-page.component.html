@@ -1,0 +1,22 @@
+<mat-drawer-container class="page">
+    <mat-drawer mode="side" opened class="sidebar">
+        <h1 class="sidebar-title">Resource Boards</h1>
+        <mat-divider></mat-divider>
+
+        <div *ngIf="authenticated" class="sidebar-input-container">
+            <button mat-raised-button color="primary">Primary</button>
+
+            <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Board Name</mat-label>
+                <input matInput type="text" [(ngModel)]="value">
+                <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </mat-drawer>
+
+    <mat-drawer-content class="content">
+        <span>Placeholder</span>
+    </mat-drawer-content>
+</mat-drawer-container>
