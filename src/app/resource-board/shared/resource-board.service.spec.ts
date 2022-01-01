@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ResourceBoardService } from './resource-board.service';
+import { ResourceBoardService } from './resource-board.mock.service';
 
 describe('ResourceBoardService', () => {
   let service: ResourceBoardService;

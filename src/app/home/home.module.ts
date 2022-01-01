@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material.module';
@@ -14,6 +15,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ToolbarComponent
   ],
   imports: [
+    CommonModule,
     AppRoutingModule,
     MaterialModule
   ],
