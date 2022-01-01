@@ -7,25 +7,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
 
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { ResourceBoardPageComponent } from './components/resource-board-page/resource-board-page.component';
+import { ResourceBoardModule } from './resource-board/resource-board.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
-    ToolbarComponent,
-    HomePageComponent,
-    ResourceBoardPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    ResourceBoardModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
