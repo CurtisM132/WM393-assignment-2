@@ -1,0 +1,11 @@
+<div class="sidebar-input-container">
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Board Name</mat-label>
+        <input matInput type="text" [(ngModel)]="resourceBoardName">
+        <button *ngIf="resourceBoardName" matSuffix mat-icon-button aria-label="Clear" (click)="resourceBoardName=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="createResourceBoard()">Create</button>
+</div>

@@ -1,0 +1,25 @@
+<div>
+    <!-- <div *ngFor="let board of resourceBoards" class="list-item">
+        <div class="list-item-content">
+            <h2 class="list-item-title">{{board.name}}</h2>
+
+            <button *ngIf="authenticated" mat-icon-button class="list-item-icon" aria-label="Delete resource board">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+
+        <mat-divider></mat-divider>
+    </div> -->
+
+    <mat-action-list>
+        <button *ngFor="let board of resourceBoards" mat-list-item> 
+            <div class="list-item-content">
+                <h3 class="list-item-title">{{board.name}}</h3>
+    
+                <button *ngIf="authenticated" mat-icon-button class="list-item-icon" aria-label="Delete resource board" (click)="deleteResourceBoard($event, board.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </button>
+    </mat-action-list>
+</div>

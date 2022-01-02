@@ -12,7 +12,15 @@ export class MockResourceBoardService implements AbstractResourceBoardService {
   private mockResourceBoards: ResourceBoardSummary[] = [
     {
       id: '1',
-      name: 'WM393',
+      name: 'Example Resource Board #1',
+    },
+    {
+      id: '2',
+      name: 'Example Resource Board #2',
+    },
+    {
+      id: '3',
+      name: 'Example Resource Board #3',
     }
   ];
 
@@ -32,10 +40,8 @@ export class MockResourceBoardService implements AbstractResourceBoardService {
   }
 
   deleteResourceBoard(id: string): Observable<boolean> {
-    this.mockResourceBoards =
-      this.mockResourceBoards.filter((resourceBoard: ResourceBoardSummary) => {
-        resourceBoard.id !== id;
-      });
+    this.mockResourceBoards = this.mockResourceBoards
+      .filter((resourceBoard: ResourceBoardSummary) => resourceBoard.id !== id);
 
     return of(true);
   }
