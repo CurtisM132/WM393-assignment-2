@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ResourceBoardSummary } from '../shared/resource-board.interface';
 
 @Component({
@@ -6,7 +6,7 @@ import { ResourceBoardSummary } from '../shared/resource-board.interface';
   templateUrl: './resource-board-display-list.component.html',
   styleUrls: ['./resource-board-display-list.component.css']
 })
-export class ResourceBoardDisplayListComponent implements OnInit {
+export class ResourceBoardDisplayListComponent {
 
   @Input() resourceBoards: ResourceBoardSummary[] = []
 
@@ -15,9 +15,6 @@ export class ResourceBoardDisplayListComponent implements OnInit {
   public authenticated = true
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public deleteResourceBoard(event: any, id: string) {
     event.stopPropagation()
