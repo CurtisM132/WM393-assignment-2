@@ -1,4 +1,4 @@
 export interface ResourceBoardSummary {
-    id: string
+    id: string //Why is this a string?
     name: string
 }
