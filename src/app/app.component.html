@@ -1,8 +1,11 @@
-<div style="display: flex; flex-direction: column; height: 100%;">
+<div class="column-align">
   <app-toolbar></app-toolbar>
 
-  <div class="main-content">
+  <div class="row-align">
     <app-sidenav></app-sidenav>
-    <router-outlet></router-outlet>
+    
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

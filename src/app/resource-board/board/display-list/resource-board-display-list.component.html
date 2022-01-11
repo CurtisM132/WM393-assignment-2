@@ -1,6 +1,7 @@
 <div>
-    <mat-action-list>
-        <button *ngFor="let board of resourceBoards" mat-list-item>
+    <mat-selection-list #shoes [multiple]="false" [(ngModel)]="selectedOptions"
+        (ngModelChange)="onSelectionChange()">
+        <mat-list-option *ngFor="let board of resourceBoards" [value]="board">
             <div class="list-item-content">
                 <h3 class="list-item-title">{{board.name}}</h3>
 
@@ -9,6 +10,6 @@
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
-        </button>
-    </mat-action-list>
+        </mat-list-option>
+    </mat-selection-list>
 </div>
