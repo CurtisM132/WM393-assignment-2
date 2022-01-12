@@ -12,18 +12,22 @@ export class ResourceBoardDisplayListComponent implements OnInit {
   @Input() resourceBoards: ResourceBoardSummary[] = []
 
   @Output() deleteResourceBoardEvent = new EventEmitter<string>();
+  @Output() selectionChangeEvent = new EventEmitter<ResourceBoardSummary>();
 
+  // TODO: Use authenication system
   public authenticated = true
   public selectedOptions: ResourceBoardSummary[] = []
 
-  constructor(public router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     this.selectedOptions[0] = this.resourceBoards[0]
+
+    this.onSelectionChange()
   }
 
   public onSelectionChange() {
-    this.router.navigate(['/resource', this.selectedOptions[0].id]);
+    this.selectionChangeEvent.emit(this.selectedOptions[0])
   }
 
   public deleteResourceBoard(event: any, id: string) {

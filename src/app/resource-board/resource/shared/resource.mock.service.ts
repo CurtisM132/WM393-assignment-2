@@ -27,7 +27,7 @@ export class MockResourceService implements AbstractResourceService {
 
   constructor() { }
 
-  getResources(): Observable<Resource[]> {
+  getResources(id: string): Observable<Resource[]> {
     return of(this.mockResources);
   }
 

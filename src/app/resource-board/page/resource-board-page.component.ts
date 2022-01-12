@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AbstractResourceBoardService } from '../board/shared/resource-board.abstract-service';
 import { ResourceBoardSummary } from '../board/shared/resource-board.interface';
 
@@ -12,7 +14,10 @@ export class ResourceBoardPageComponent implements OnInit {
   public authenticated = true;
   public resourceBoards: ResourceBoardSummary[] = [];
 
-  constructor(public resourceBoardService: AbstractResourceBoardService) { }
+  constructor(
+    private resourceBoardService: AbstractResourceBoardService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.fetchResourceBoards()
@@ -48,6 +53,10 @@ export class ResourceBoardPageComponent implements OnInit {
           console.log("Failed to delete resource board: ", id)
         }
       })
+  }
+
+  public handleBoardSelection(board: ResourceBoardSummary) {
+    this.router.navigate(['/resource', board.id]);
   }
 
 }

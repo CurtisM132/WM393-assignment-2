@@ -1,16 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { Resource } from '../shared/resource.interface';
+import { MatTableDataSource, MatRow } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-resource-table',
   templateUrl: './resource-table.component.html',
   styleUrls: ['./resource-table.component.css']
 })
-export class ResourceTableComponent implements OnInit {
+export class ResourceTableComponent implements AfterViewInit, OnInit {
 
   @Input() resources: Resource[] = []
 
-  public columns = [
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  // TODO: Use authenication system
+  public authenticated = true;
+  
+  public dataSource = new MatTableDataSource<Resource>();
+  public readonly columns = [
     {
       columnDef: 'name',
       header: 'Name',
@@ -19,7 +29,7 @@ export class ResourceTableComponent implements OnInit {
     {
       columnDef: 'uploadDate',
       header: 'Upload Date',
-      cell: (element: Resource) => `${element.uploadDate}`,
+      cell: (element: Resource) => `${element.uploadDate.toDateString()}`,
     },
     {
       // TODO: Calculate type from file format
@@ -30,19 +40,31 @@ export class ResourceTableComponent implements OnInit {
     {
       columnDef: 'fileFormat',
       header: 'File Format',
-      cell: (element: Resource) => `${element.fileFormat}`,
+      cell: (element: Resource) => `${element.fileFormat.toLocaleUpperCase()}`,
     },
     {
       columnDef: 'comment',
       header: 'Comment',
-      cell: (element: Resource) => `${element.comment}`,
+      cell: (element: Resource) => `${element.comment || ''}`,
     },
   ];
-  public displayedColumnsFn = this.columns.map(c => c.columnDef);
+  public readonly displayedColumns = this.columns.map(c => c.columnDef);
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
+    this.dataSource.data = this.resources;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
+  ngOnInit() {
+    if (this.authenticated) {
+      this.displayedColumns.push('delete')
+    }
+  }
+
+  public handleRowClick(row: Resource) {
+    console.log("Download resource: ", row.id)
+  }
 }

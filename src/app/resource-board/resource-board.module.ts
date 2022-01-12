@@ -12,12 +12,14 @@ import { ResourceTableComponent } from './resource/resource-table/resource-table
 import { AppRoutingModule } from '../app-routing.module';
 import { AbstractResourceService } from './resource/shared/resource.abstract-service';
 import { MockResourceService } from './resource/shared/resource.mock.service';
+import { ResourcesContainerComponent } from './resource/resources-container/resources-container.component';
 
 @NgModule({
   declarations: [
     ResourceBoardPageComponent,
     ResourceBoardDisplayListComponent,
     CreateResourceBoardInputComponent,
+    ResourcesContainerComponent,
     ResourceTableComponent
   ],
   imports: [
