@@ -1,8 +1,10 @@
 import { Component, Input, ViewChild, AfterViewInit, OnInit, Output, EventEmitter } from '@angular/core';
-import { Resource } from '../shared/resource.interface';
 import { MatTableDataSource, MatRow } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+
+import { Resource } from '../shared/resource.interface';
+import { fileExtensionToFileType } from '../shared/resource-file.enums';
 
 @Component({
   selector: 'app-resource-table',
@@ -38,7 +40,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
       // TODO: Calculate type from file format
       columnDef: 'type',
       header: 'Type',
-      cell: (element: Resource) => `${element.fileFormat}`,
+      cell: (element: Resource) => `${fileExtensionToFileType(element.fileFormat)}`,
     },
     {
       columnDef: 'fileFormat',
