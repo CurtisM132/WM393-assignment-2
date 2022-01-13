@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractResourceService } from '../shared/resource.abstract-service';
-import { Resource } from '../shared/resource.interface';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+
+import { AbstractResourceService } from '../shared/resource.abstract-service';
+import { Resource } from '../shared/resource.interface';
 
 @Component({
   selector: 'app-resources-container',
@@ -29,6 +30,19 @@ export class ResourcesContainerComponent implements OnInit {
     ).subscribe((resources: Resource[]) => {
       this.resources = resources
     })
+  }
+
+  public downloadResource(resource: Resource) {
+    if (resource.id) {
+      this.resourceService.downloadResource(resource.id)
+        .subscribe((success: boolean) => {
+          if (!success) {
+            console.error("Failed to download resource")
+          }
+        })
+    } else {
+      console.error("Failed to download resource - id doesn't exist")
+    }
   }
 
 }

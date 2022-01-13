@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, OnInit, Output, EventEmitter } from '@angular/core';
 import { Resource } from '../shared/resource.interface';
 import { MatTableDataSource, MatRow } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,12 +13,14 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
 
   @Input() resources: Resource[] = []
 
+  @Output() downloadResourceEvent = new EventEmitter<Resource>();
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   // TODO: Use authenication system
   public authenticated = true;
-  
+
   public dataSource = new MatTableDataSource<Resource>();
   public readonly columns = [
     {
@@ -65,6 +67,6 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
   }
 
   public handleRowClick(row: Resource) {
-    console.log("Download resource: ", row.id)
+    this.downloadResourceEvent.emit(row)
   }
 }
