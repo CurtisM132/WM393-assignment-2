@@ -22,7 +22,7 @@ export class MockResourceService implements AbstractResourceService {
     {
       id: '2',
       name: 'How to Setup ArcGIS',
-      uploadDate: new Date("2021-10-30"),
+      uploadDate: new Date("2022-01-13"),
       fileFormat: 'mp4',
       filePath: './assets/demo-resources/arcgis_setup.mp4',
     }
