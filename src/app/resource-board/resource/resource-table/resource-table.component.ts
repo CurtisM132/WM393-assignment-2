@@ -14,6 +14,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
   @Input() resources: Resource[] = []
 
   @Output() downloadResourceEvent = new EventEmitter<Resource>();
+  @Output() deleteResourceEvent = new EventEmitter<string>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -68,5 +69,9 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
 
   public handleRowClick(row: Resource) {
     this.downloadResourceEvent.emit(row)
+  }
+
+  public handleDelete(row: Resource) {
+    this.deleteResourceEvent.emit(row.id)
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {saveAs} from 'file-saver';
+import { saveAs } from 'file-saver';
 
 import { Resource } from './resource.interface';
 import { AbstractResourceService } from './resource.abstract-service';
@@ -46,18 +46,24 @@ export class MockResourceService implements AbstractResourceService {
   }
 
   deleteResource(id: string): Observable<boolean> {
-    this.mockResources = this.mockResources
-      .filter((resourceBoard: Resource) => resourceBoard.id !== id);
+    if (id && id !== "") {
+      this.mockResources = this.mockResources
+        .filter((resourceBoard: Resource) => resourceBoard.id !== id);
 
-    return of(true);
+      return of(true);
+    }
+
+    return of(false);
   }
 
   downloadResource(id: string): Observable<boolean> {
-    const resource = this.mockResources.find(x => x.id === id)
-    if (resource) {
-      saveAs(resource.filePath, `${resource.name}.${resource.fileFormat}`);
-    
-      return of(true);
+    if (id && id !== "") {
+      const resource = this.mockResources.find(x => x.id === id)
+      if (resource) {
+        saveAs(resource.filePath, `${resource.name}.${resource.fileFormat}`);
+
+        return of(true);
+      }
     }
 
     return of(false);

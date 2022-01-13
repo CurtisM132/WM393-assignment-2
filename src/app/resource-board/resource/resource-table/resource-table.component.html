@@ -11,7 +11,7 @@
   <ng-container matColumnDef="delete">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-icon-button matTooltip="Delete" color="primary">
+      <button mat-icon-button matTooltip="Delete" color="primary" (click)="$event.stopPropagation();handleDelete(element)">
         <mat-icon aria-label="Delete resource">delete</mat-icon>
       </button>
     </mat-cell>

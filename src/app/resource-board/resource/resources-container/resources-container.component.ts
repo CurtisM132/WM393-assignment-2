@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
 
 import { AbstractResourceService } from '../shared/resource.abstract-service';
 import { Resource } from '../shared/resource.interface';
@@ -12,6 +11,7 @@ import { Resource } from '../shared/resource.interface';
 })
 export class ResourcesContainerComponent implements OnInit {
 
+  public resourceBoardId: string;
   public resources: Resource[] = [];
 
   constructor(
@@ -22,14 +22,18 @@ export class ResourcesContainerComponent implements OnInit {
   ngOnInit(): void {
     // Get the resource board ID from the route (URL) 
     // then load the resources associated with that resource board
-    this.route.paramMap.pipe(
-      switchMap((params: any) => {
-        const resourceBoardId = params.get('id');
-        return this.resourceService.getResources(resourceBoardId);
+    this.route.paramMap
+      .subscribe((params: any) => {
+        this.resourceBoardId = params.get('id');
+        this.getResources()
       })
-    ).subscribe((resources: Resource[]) => {
-      this.resources = resources
-    })
+  }
+
+  public getResources() {
+    this.resourceService.getResources(this.resourceBoardId)
+      .subscribe((resources: Resource[]) => {
+        this.resources = resources
+      })
   }
 
   public downloadResource(resource: Resource) {
@@ -42,6 +46,21 @@ export class ResourcesContainerComponent implements OnInit {
         })
     } else {
       console.error("Failed to download resource - id doesn't exist")
+    }
+  }
+
+  public deleteResource(id: string) {
+    if (id) {
+      this.resourceService.deleteResource(id)
+        .subscribe((success: boolean) => {
+          if (success) {
+            this.getResources()
+          } else {
+            console.error("Failed to delete resource")
+          }
+        })
+    } else {
+      console.error("Failed to delete resource - id not supplied")
     }
   }
 
