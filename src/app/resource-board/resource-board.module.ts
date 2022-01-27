@@ -14,19 +14,22 @@ import { AbstractResourceService } from './resource/shared/resource.abstract-ser
 import { MockResourceService } from './resource/shared/resource.mock.service';
 import { ResourcesContainerComponent } from './resource/resources-container/resources-container.component';
 
+import { FileUploadModule } from '../file-upload/file-upload.module';
+
 @NgModule({
   declarations: [
     ResourceBoardPageComponent,
     ResourceBoardDisplayListComponent,
     CreateResourceBoardInputComponent,
     ResourcesContainerComponent,
-    ResourceTableComponent
+    ResourceTableComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
     AppRoutingModule,
+    FileUploadModule
   ],
   exports: [
     ResourceBoardPageComponent

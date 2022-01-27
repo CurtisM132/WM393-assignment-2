@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, AfterViewInit, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource, MatRow } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { Observable } from 'rxjs';
 
 import { Resource } from '../shared/resource.interface';
 import { fileExtensionToFileType } from '../shared/resource-file.enums';
@@ -13,13 +13,12 @@ import { fileExtensionToFileType } from '../shared/resource-file.enums';
 })
 export class ResourceTableComponent implements AfterViewInit, OnInit {
 
-  @Input() resources: Resource[] = []
+  @Input() resources: Observable<Resource[]>;
 
   @Output() downloadResourceEvent = new EventEmitter<Resource>();
   @Output() deleteResourceEvent = new EventEmitter<string>();
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   // TODO: Use authenication system
   public authenticated = true;
@@ -58,15 +57,18 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
   constructor() { }
 
   ngAfterViewInit() {
-    this.dataSource.data = this.resources;
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit() {
+    // If the user is a tutor then enable the delete column (the delete row button)
     if (this.authenticated) {
       this.displayedColumns.push('delete')
     }
+
+    this.resources.subscribe(resources => {
+      this.dataSource.data = resources
+    })
   }
 
   public handleRowClick(row: Resource) {

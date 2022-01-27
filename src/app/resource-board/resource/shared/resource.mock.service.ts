@@ -35,15 +35,15 @@ export class MockResourceService implements AbstractResourceService {
     return of(this.mockResources);
   }
 
-  uploadResource(resource: Resource): Observable<string> {
+  uploadResource(resource: Resource): Observable<{ id: string, success: boolean }> {
     const id = (this.mockResources.length + 1).toString();
 
     this.mockResources.push({
-      ...resource,
       id,
+      ...resource,
     });
 
-    return of(id);
+    return of({ id, success: true });
   }
 
   deleteResource(id: string): Observable<boolean> {
