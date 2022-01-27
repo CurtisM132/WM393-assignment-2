@@ -16,14 +16,14 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     AppComponent,
     HomePageComponent,
     SidenavComponent,
-    ToolbarComponent
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ResourceBoardModule
+    ResourceBoardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
