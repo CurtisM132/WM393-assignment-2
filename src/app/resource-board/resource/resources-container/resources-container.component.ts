@@ -77,7 +77,7 @@ export class ResourcesContainerComponent implements OnInit {
         name: fileName,
         uploadDate: new Date(),
         fileFormat: fileExt as ACCEPTED_FILE_EXTENSIONS,
-        filePath: "" // TODO
+        filePath: file.plainUrl,
       }
   
       this.resourceService.uploadResource(resource)
