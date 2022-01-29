@@ -1,7 +1,18 @@
 version: "3.9"
-   
+
 services:
   wmgtss:
     build: .
     ports:
       - "80:80"
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    volumes:
+      - ./keycloak:/opt/jboss/keycloak/imports
+    environment:
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+    command: ["-Djboss.http.port=9090 -Dkeycloak.profile.feature.upload_scripts=enabled"]
+    ports:
+      - "9090:9090"
