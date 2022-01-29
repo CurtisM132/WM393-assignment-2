@@ -36,7 +36,7 @@ export class DragAndDropFileDirective {
     evt.stopPropagation();
     this.opacity = '0';
 
-    // Format dropped file to a useable datatype
+    // Format dropped files to a useable datatype
     if (evt.dataTransfer) {
       let files: FileHandle[] = [];
       for (let i = 0; i < evt.dataTransfer.files.length; i++) {
@@ -47,7 +47,6 @@ export class DragAndDropFileDirective {
         files.push({ file, url, plainUrl });
       }
       if (files.length > 0) {
-        console.log(files)
         this.filesDropped.emit(files);
       }
     }
