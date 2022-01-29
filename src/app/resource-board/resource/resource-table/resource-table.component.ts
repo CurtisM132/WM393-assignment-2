@@ -15,7 +15,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
 
   @Input() resources: Observable<Resource[]>;
 
-  @Output() downloadResourceEvent = new EventEmitter<Resource>();
+  @Output() resourceClickedEvent = new EventEmitter<Resource>();
   @Output() deleteResourceEvent = new EventEmitter<string>();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -28,27 +28,27 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
     {
       columnDef: 'name',
       header: 'Name',
-      cell: (element: Resource) => `${element.name}`,
+      cell: (resource: Resource) => `${resource.name}`,
     },
     {
       columnDef: 'uploadDate',
       header: 'Upload Date',
-      cell: (element: Resource) => `${element.uploadDate.toDateString()}`,
+      cell: (resource: Resource) => `${resource.uploadDate.toDateString()}`,
     },
     {
       columnDef: 'type',
       header: 'Type',
-      cell: (element: Resource) => `${fileExtensionToFileType(element.fileFormat)}`,
+      cell: (resource: Resource) => `${resource.fileType}`,
     },
     {
       columnDef: 'fileFormat',
       header: 'File Format',
-      cell: (element: Resource) => `${element.fileFormat.toLocaleUpperCase()}`,
+      cell: (resource: Resource) => `${resource.fileFormat.toLocaleUpperCase()}`,
     },
     {
       columnDef: 'comment',
       header: 'Comment',
-      cell: (element: Resource) => `${element.comment || ''}`,
+      cell: (resource: Resource) => `${resource.comment || ''}`,
     },
   ];
   public readonly displayedColumns = this.columns.map(c => c.columnDef);
@@ -71,7 +71,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
   }
 
   public handleRowClick(row: Resource): void {
-    this.downloadResourceEvent.emit(row);
+    this.resourceClickedEvent.emit(row);
   }
 
   public handleDelete(row: Resource): void {

@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 
 import { Resource } from './resource.interface';
 import { AbstractResourceService } from './resource.abstract-service';
-import { ACCEPTED_FILE_EXTENSIONS } from './resource-file.enums';
+import { ACCEPTED_FILE_EXTENSIONS, FILE_TYPE } from './resource-file.enums';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class MockResourceService implements AbstractResourceService {
       id: '1',
       name: '3D Cartography Example',
       uploadDate: new Date("2021-10-30"),
+      fileType: FILE_TYPE.IMAGE,
       fileFormat: ACCEPTED_FILE_EXTENSIONS.JPEG,
       filePath: './assets/demo-resources/cartographic_example.png',
       comment: 'An example of the map I want students to produce for their project'
@@ -24,6 +25,7 @@ export class MockResourceService implements AbstractResourceService {
       id: '2',
       name: 'How to Setup ArcGIS',
       uploadDate: new Date("2022-01-13"),
+      fileType: FILE_TYPE.VIDEO,
       fileFormat: ACCEPTED_FILE_EXTENSIONS.MP4,
       filePath: './assets/demo-resources/arcgis_setup.mp4',
     }
@@ -31,8 +33,17 @@ export class MockResourceService implements AbstractResourceService {
 
   constructor() { }
 
-  public getResources(id: string): Observable<Resource[]> {
+  public getResources(boardId: string): Observable<Resource[]> {
     return of(this.mockResources);
+  }
+
+  public getResource(resourceId: string): Observable<Resource | undefined> {
+    const index = this.mockResources.findIndex(resource => resource.id === resourceId);
+    if (index) {
+      return of(this.mockResources[index]);
+    }
+
+    return of(undefined);
   }
 
   public uploadResource(resource: Resource): Observable<{ id: string, success: boolean }> {

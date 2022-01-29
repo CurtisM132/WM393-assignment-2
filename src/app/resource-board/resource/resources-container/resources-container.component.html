@@ -1,4 +1,4 @@
-<app-resource-table [resources]="resources$" (downloadResourceEvent)="downloadResource($event)"
+<app-resource-table [resources]="resources$" (resourceClickedEvent)="handleResourceClicked($event)"
     (deleteResourceEvent)="deleteResource($event)"></app-resource-table>
 
 <app-file-upload [displayUploadButton]="resources.length <= 0" (filesDropped)="handleFilesDropped($event)"></app-file-upload>

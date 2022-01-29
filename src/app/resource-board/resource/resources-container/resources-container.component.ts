@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { FileHandle } from '../../../file-upload/drag-and-drop-file.directive';
-import { ACCEPTED_FILE_EXTENSIONS } from '../shared/resource-file.enums';
+import { ACCEPTED_FILE_EXTENSIONS, fileExtensionToFileType, FILE_TYPE } from '../shared/resource-file.enums';
 
 import { AbstractResourceService } from '../shared/resource.abstract-service';
 import { Resource } from '../shared/resource.interface';
@@ -23,6 +23,7 @@ export class ResourcesContainerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private resourceService: AbstractResourceService
   ) { }
 
@@ -34,6 +35,22 @@ export class ResourcesContainerComponent implements OnInit {
         this.resourceBoardId = params.get('id');
         this.getResources();
       })
+  }
+
+  public handleFilesDropped(files: FileHandle[]): void {
+    files.forEach(file => {
+      this.uploadResource(file);
+    });
+  }
+
+  public handleResourceClicked(resource: Resource): void {
+    if (resource.fileType === FILE_TYPE.IMAGE || resource.fileType === FILE_TYPE.VIDEO) {
+      // Navigate to /resource/boardId/resourceId
+      // This route corresponds with a resource display component (see routing module)
+      this.router.navigate([`/resource/${this.resourceBoardId}`, resource.id]);
+    } else {
+      this.downloadResource(resource);
+    }
   }
 
   public getResources(): void {
@@ -81,6 +98,7 @@ export class ResourcesContainerComponent implements OnInit {
       const resource: Resource = {
         name: fileName,
         uploadDate: new Date(),
+        fileType: fileExtensionToFileType(fileExt as ACCEPTED_FILE_EXTENSIONS),
         fileFormat: fileExt as ACCEPTED_FILE_EXTENSIONS,
         filePath: file.plainUrl,
       };
@@ -98,10 +116,6 @@ export class ResourcesContainerComponent implements OnInit {
     // TODO: Indicate to the user that the file type is not acceptable
   }
 
-  public handleFilesDropped(files: FileHandle[]): void {
-    files.forEach(file => {
-      this.uploadResource(file);
-    });
-  }
+
 
 }

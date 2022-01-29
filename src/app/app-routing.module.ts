@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomePageComponent } from './home-page/home-page.component';
 import { ResourceBoardPageComponent } from './resource-board/page/resource-board-page.component';
+import { DisplayResourceComponent } from './resource-board/resource/display-resource/display-resource.component';
 import { ResourcesContainerComponent } from './resource-board/resource/resources-container/resources-container.component';
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: ':id',
         component: ResourcesContainerComponent,
+      },
+      {
+        path: ':id/:id',
+        component: DisplayResourceComponent,
       }
     ]
   },

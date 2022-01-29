@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
+import { AppRoutingModule } from '../app-routing.module';
+
+import { FileUploadModule } from '../file-upload/file-upload.module';
 
 import { ResourceBoardPageComponent } from './page/resource-board-page.component';
 import { ResourceBoardDisplayListComponent } from './board/display-list/resource-board-display-list.component';
@@ -9,12 +12,11 @@ import { CreateResourceBoardInputComponent } from './board/create-resource-board
 import { AbstractResourceBoardService } from './board/shared/resource-board.abstract-service';
 import { MockResourceBoardService } from './board/shared/resource-board.mock.service';
 import { ResourceTableComponent } from './resource/resource-table/resource-table.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { AbstractResourceService } from './resource/shared/resource.abstract-service';
 import { MockResourceService } from './resource/shared/resource.mock.service';
 import { ResourcesContainerComponent } from './resource/resources-container/resources-container.component';
+import { DisplayResourceComponent } from './resource/display-resource/display-resource.component';
 
-import { FileUploadModule } from '../file-upload/file-upload.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { FileUploadModule } from '../file-upload/file-upload.module';
     CreateResourceBoardInputComponent,
     ResourcesContainerComponent,
     ResourceTableComponent,
+    DisplayResourceComponent,
   ],
   imports: [
     CommonModule,
