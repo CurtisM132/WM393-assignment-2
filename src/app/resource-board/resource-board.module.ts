@@ -29,10 +29,10 @@ import { FileUploadModule } from '../file-upload/file-upload.module';
     FormsModule,
     MaterialModule,
     AppRoutingModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   exports: [
-    ResourceBoardPageComponent
+    ResourceBoardPageComponent,
   ],
   providers: [
     { provide: AbstractResourceBoardService, useClass: MockResourceBoardService },

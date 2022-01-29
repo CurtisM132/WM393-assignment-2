@@ -31,11 +31,11 @@ export class MockResourceService implements AbstractResourceService {
 
   constructor() { }
 
-  getResources(id: string): Observable<Resource[]> {
+  public getResources(id: string): Observable<Resource[]> {
     return of(this.mockResources);
   }
 
-  uploadResource(resource: Resource): Observable<{ id: string, success: boolean }> {
+  public uploadResource(resource: Resource): Observable<{ id: string, success: boolean }> {
     const id = (this.mockResources.length + 1).toString();
 
     this.mockResources.push({
@@ -46,7 +46,7 @@ export class MockResourceService implements AbstractResourceService {
     return of({ id, success: true });
   }
 
-  deleteResource(id: string): Observable<boolean> {
+  public deleteResource(id: string): Observable<boolean> {
     if (id && id !== "") {
       this.mockResources = this.mockResources
         .filter((resourceBoard: Resource) => resourceBoard.id !== id);
@@ -57,7 +57,7 @@ export class MockResourceService implements AbstractResourceService {
     return of(false);
   }
 
-  downloadResource(id: string): Observable<boolean> {
+  public downloadResource(id: string): Observable<boolean> {
     if (id && id !== "") {
       const resource = this.mockResources.find(x => x.id === id)
       if (resource) {

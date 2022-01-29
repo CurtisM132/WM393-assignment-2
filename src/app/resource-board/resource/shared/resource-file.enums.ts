@@ -6,7 +6,7 @@ export enum ACCEPTED_FILE_EXTENSIONS {
     DOCX = 'docx',
     TXT = 'txt',
     MD = 'md',
-}
+};
 
 export enum FILE_TYPE {
     UNKNOWN = 'UNKNOWN',
@@ -14,9 +14,9 @@ export enum FILE_TYPE {
     VIDEO = 'VIDEO',
     TEXT = 'TEXT',
     DOC = 'DOCUMENT',
-}
+};
 
-export function fileExtensionToFileType(ext: ACCEPTED_FILE_EXTENSIONS) {
+export function fileExtensionToFileType(ext: ACCEPTED_FILE_EXTENSIONS): FILE_TYPE {
     switch (ext) {
         case ACCEPTED_FILE_EXTENSIONS.JPEG:
         case ACCEPTED_FILE_EXTENSIONS.PNG:
@@ -32,4 +32,4 @@ export function fileExtensionToFileType(ext: ACCEPTED_FILE_EXTENSIONS) {
         default:
             return FILE_TYPE.UNKNOWN;
     }
-}
+};

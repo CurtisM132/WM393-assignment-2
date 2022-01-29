@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { ResourceBoardSummary } from '../shared/resource-board.interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resource-board-display-list',
@@ -9,31 +8,31 @@ import { Router } from '@angular/router';
 })
 export class ResourceBoardDisplayListComponent implements OnInit {
 
-  @Input() resourceBoards: ResourceBoardSummary[] = []
+  @Input() resourceBoards: ResourceBoardSummary[] = [];
 
   @Output() deleteResourceBoardEvent = new EventEmitter<string>();
   @Output() selectionChangeEvent = new EventEmitter<ResourceBoardSummary>();
 
   // TODO: Use authenication system
-  public authenticated = true
-  public selectedOptions: ResourceBoardSummary[] = []
+  public authenticated = true;
+  public selectedOptions: ResourceBoardSummary[] = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.selectedOptions[0] = this.resourceBoards[0]
+    this.selectedOptions[0] = this.resourceBoards[0];
 
-    this.onSelectionChange()
+    this.onSelectionChange();
   }
 
-  public onSelectionChange() {
-    this.selectionChangeEvent.emit(this.selectedOptions[0])
+  public onSelectionChange(): void {
+    this.selectionChangeEvent.emit(this.selectedOptions[0]);
   }
 
-  public deleteResourceBoard(event: any, id: string) {
-    event.stopPropagation()
+  public deleteResourceBoard(event: any, id: string): void {
+    event.stopPropagation();
 
-    this.deleteResourceBoardEvent.emit(id)
+    this.deleteResourceBoardEvent.emit(id);
   }
 
 }

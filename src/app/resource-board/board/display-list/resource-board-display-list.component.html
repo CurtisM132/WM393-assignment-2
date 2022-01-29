@@ -1,6 +1,5 @@
 <div>
-    <mat-selection-list #shoes [multiple]="false" [(ngModel)]="selectedOptions"
-        (ngModelChange)="onSelectionChange()">
+    <mat-selection-list [multiple]="false" [(ngModel)]="selectedOptions" (ngModelChange)="onSelectionChange()">
         <mat-list-option *ngFor="let board of resourceBoards" [value]="board">
             <div class="list-item-content">
                 <h3 class="list-item-title">{{board.name}}</h3>

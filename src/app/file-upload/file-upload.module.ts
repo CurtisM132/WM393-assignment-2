@@ -17,7 +17,7 @@ import { DragAndDropFileDirective } from './drag-and-drop-file.directive';
     MaterialModule,
   ],
   exports: [
-    FileUploadComponent
+    FileUploadComponent,
   ]
 })
 export class FileUploadModule { }

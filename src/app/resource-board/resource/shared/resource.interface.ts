@@ -7,4 +7,4 @@ export interface Resource {
     fileFormat: ACCEPTED_FILE_EXTENSIONS
     filePath: string
     comment?: string
-}
+};

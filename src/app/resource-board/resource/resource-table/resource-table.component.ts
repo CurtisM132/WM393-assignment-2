@@ -36,7 +36,6 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
       cell: (element: Resource) => `${element.uploadDate.toDateString()}`,
     },
     {
-      // TODO: Calculate type from file format
       columnDef: 'type',
       header: 'Type',
       cell: (element: Resource) => `${fileExtensionToFileType(element.fileFormat)}`,
@@ -56,26 +55,26 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
 
   constructor() { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // If the user is a tutor then enable the delete column (the delete row button)
     if (this.authenticated) {
-      this.displayedColumns.push('delete')
+      this.displayedColumns.push('delete');
     }
 
     this.resources.subscribe(resources => {
-      this.dataSource.data = resources
+      this.dataSource.data = resources;
     })
   }
 
-  public handleRowClick(row: Resource) {
-    this.downloadResourceEvent.emit(row)
+  public handleRowClick(row: Resource): void {
+    this.downloadResourceEvent.emit(row);
   }
 
-  public handleDelete(row: Resource) {
-    this.deleteResourceEvent.emit(row.id)
+  public handleDelete(row: Resource): void {
+    this.deleteResourceEvent.emit(row.id);
   }
 }

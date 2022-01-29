@@ -12,6 +12,6 @@ export class HomePageComponent {
 
   constructor() { }
 
-  // TODO: Use authentication system - implement plz
+  // TODO: Use authentication system
   public authenticated = true;
 }

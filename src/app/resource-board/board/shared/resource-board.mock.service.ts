@@ -9,7 +9,7 @@ import { ResourceBoardSummary } from './resource-board.interface';
 })
 export class MockResourceBoardService implements AbstractResourceBoardService {
 
-  private mockResourceBoards: ResourceBoardSummary[] = [ // move to somewhere else noob
+  private mockResourceBoards: ResourceBoardSummary[] = [
     {
       id: '1',
       name: 'Example Resource Board #1',
@@ -24,11 +24,11 @@ export class MockResourceBoardService implements AbstractResourceBoardService {
     }
   ];
 
-  getResourceBoards(): Observable<ResourceBoardSummary[]> {
+  public getResourceBoards(): Observable<ResourceBoardSummary[]> {
     return of(this.mockResourceBoards);
   }
 
-  createResourceBoard(name: string): Observable<string> {
+  public createResourceBoard(name: string): Observable<string> {
     const id = (this.mockResourceBoards.length + 1).toString();
 
     this.mockResourceBoards.push({
@@ -39,7 +39,7 @@ export class MockResourceBoardService implements AbstractResourceBoardService {
     return of(id); 
   }
 
-  deleteResourceBoard(id: string): Observable<boolean> {
+  public deleteResourceBoard(id: string): Observable<boolean> {
     this.mockResourceBoards = this.mockResourceBoards
       .filter((resourceBoard: ResourceBoardSummary) => resourceBoard.id !== id);
 

@@ -21,13 +21,13 @@ export class FileUploadComponent {
     this.filesDropped.emit(files)
   }
 
-  public handleUploadClick() {
+  public handleUploadClick(): void {
     // Simulate a click event on the file input to open the file picker/browser
     const e: HTMLElement = this.FileSelectInputDialog.nativeElement;
     e.click();
   }
 
-  public handleFileInput(event: any) {
+  public handleFileInput(event: any): void {
     // Format dropped files to a useable datatype
     if (event.target.files) {
       let files: FileHandle[] = [];

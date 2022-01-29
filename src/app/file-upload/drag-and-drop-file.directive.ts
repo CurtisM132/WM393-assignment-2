@@ -19,19 +19,19 @@ export class DragAndDropFileDirective {
 
   constructor(private sanitizer: DomSanitizer) { }
 
-  @HostListener("dragover", ["$event"]) public onDragOver(evt: DragEvent) {
+  @HostListener("dragover", ["$event"]) public onDragOver(evt: DragEvent): void {
     evt.preventDefault();
     evt.stopPropagation();
     this.opacity = "0.35";
   }
 
-  @HostListener("dragleave", ["$event"]) public onDragLeave(evt: DragEvent) {
+  @HostListener("dragleave", ["$event"]) public onDragLeave(evt: DragEvent): void {
     evt.preventDefault();
     evt.stopPropagation();
     this.opacity = "0";
   }
 
-  @HostListener('drop', ['$event']) public onDrop(evt: DragEvent) {
+  @HostListener('drop', ['$event']) public onDrop(evt: DragEvent): void {
     evt.preventDefault();
     evt.stopPropagation();
     this.opacity = '0';
@@ -55,7 +55,7 @@ export class DragAndDropFileDirective {
   // Due to this directive being used on a overlay component we need to be able to pass through certain pointer events to components beneath
   // To do this we disable pointer events (CSS: pointer-events: none;) for a 1 second duration so all the pointers events are ignored by this component and passed through
   // When the events we want (see host listeners above) are triggered they leave the pointer-events CSS set to all so this directive can bind to them 
-  @HostListener("mousemove", ["$event"]) public onMouseMove(evt: DragEvent) {
+  @HostListener("mousemove", ["$event"]) public onMouseMove(evt: DragEvent): void {
     evt.preventDefault();
     evt.stopPropagation();
 

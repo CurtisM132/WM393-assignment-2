@@ -13,8 +13,8 @@ export class CreateResourceBoardInputComponent {
 
   constructor() { }
 
-  public createResourceBoard() {
-    this.createResourceBoardEvent.emit(this.resourceBoardName)
+  public createResourceBoard(): void {
+    this.createResourceBoardEvent.emit(this.resourceBoardName);
   }
 
 }

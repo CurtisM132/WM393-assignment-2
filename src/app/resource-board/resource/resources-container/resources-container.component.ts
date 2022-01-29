@@ -36,7 +36,7 @@ export class ResourcesContainerComponent implements OnInit {
       })
   }
 
-  public getResources() {
+  public getResources(): void {
     this.resourceService.getResources(this.resourceBoardId)
       .subscribe((resources: Resource[]) => {
         this.resources$.next(resources);
@@ -44,7 +44,7 @@ export class ResourcesContainerComponent implements OnInit {
       })
   }
 
-  public downloadResource(resource: Resource) {
+  public downloadResource(resource: Resource): void {
     if (resource.id) {
       this.resourceService.downloadResource(resource.id)
         .subscribe((success: boolean) => {
@@ -57,7 +57,7 @@ export class ResourcesContainerComponent implements OnInit {
     }
   }
 
-  public deleteResource(id: string) {
+  public deleteResource(id: string): void {
     if (id) {
       this.resourceService.deleteResource(id)
         .subscribe((success: boolean) => {
@@ -72,7 +72,7 @@ export class ResourcesContainerComponent implements OnInit {
     }
   }
 
-  public uploadResource(file: FileHandle) {
+  public uploadResource(file: FileHandle): void {
     // Check if the file extension is acceptable
     const fileName = file.file.name.split(".")[0];
     const fileExt = file.file.name.split(".")[1];
