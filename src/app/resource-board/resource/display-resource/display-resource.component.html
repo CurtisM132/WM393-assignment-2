@@ -1,3 +1,30 @@
-<div *ngIf="safeToDisplay">
-    <span>Test</span>
+<div *ngIf="safeToDisplay && resource" class="column-align">
+    <div class="top-bar">
+        <h2 class="resource-name">{{resource.name}}</h2>
+        <button mat-raised-button color="primary" class="close-button" (click)="handleClose()">
+            Close
+        </button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="resource-file-container">
+        <!-- Display an image if the resource is an image type -->
+        <img *ngIf="resource.fileType === FILE_TYPE_ENUM.IMAGE" [src]="resource.filePath" class="resource-file-display">
+
+        <!-- Display a video if the resource is an video type -->
+        <video *ngIf="resource.fileType === FILE_TYPE_ENUM.VIDEO" class="resource-file-display" controls autoplay>
+            <source [src]="resource.filePath">
+        </video>
+    </div>
+</div>
+
+<div *ngIf="!resource">
+    <!-- TODO -->
+    <h1>404</h1>
+</div>
+
+<div *ngIf="resource && !safeToDisplay">
+    <!-- TODO -->
+    <h1>Resource not applicable for viewing</h1>
 </div>

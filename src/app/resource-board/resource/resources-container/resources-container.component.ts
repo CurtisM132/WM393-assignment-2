@@ -47,7 +47,7 @@ export class ResourcesContainerComponent implements OnInit {
     if (resource.fileType === FILE_TYPE.IMAGE || resource.fileType === FILE_TYPE.VIDEO) {
       // Navigate to /resource/boardId/resourceId
       // This route corresponds with a resource display component (see routing module)
-      this.router.navigate([`/resource/${this.resourceBoardId}`, resource.id]);
+      this.router.navigate([`/resource`, this.resourceBoardId, resource.id]);
     } else {
       this.downloadResource(resource);
     }
@@ -115,7 +115,5 @@ export class ResourcesContainerComponent implements OnInit {
 
     // TODO: Indicate to the user that the file type is not acceptable
   }
-
-
 
 }

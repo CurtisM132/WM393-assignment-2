@@ -17,7 +17,7 @@ const routes: Routes = [
         component: ResourcesContainerComponent,
       },
       {
-        path: ':id/:id',
+        path: ':boardId/:resourceId',
         component: DisplayResourceComponent,
       }
     ]

@@ -19,7 +19,7 @@ export class MockResourceService implements AbstractResourceService {
       fileType: FILE_TYPE.IMAGE,
       fileFormat: ACCEPTED_FILE_EXTENSIONS.JPEG,
       filePath: './assets/demo-resources/cartographic_example.png',
-      comment: 'An example of the map I want students to produce for their project'
+      comment: 'An example of the map I want you to produce for your project'
     },
     {
       id: '2',
@@ -37,9 +37,9 @@ export class MockResourceService implements AbstractResourceService {
     return of(this.mockResources);
   }
 
-  public getResource(resourceId: string): Observable<Resource | undefined> {
+  public getResource(boardId: string, resourceId: string): Observable<Resource | undefined> {
     const index = this.mockResources.findIndex(resource => resource.id === resourceId);
-    if (index) {
+    if (index > -1) {
       return of(this.mockResources[index]);
     }
 
