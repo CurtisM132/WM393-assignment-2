@@ -15,7 +15,6 @@ export function InitialiseKeycloak(keycloak: KeycloakService) {
     });
 }
 
-
 export async function getLoggedInState(keycloak: KeycloakService): Promise<boolean> {
   return await keycloak.isLoggedIn();
 }
@@ -29,7 +28,7 @@ export async function getUserProfile(keycloak: KeycloakService): Promise<Keycloa
   return undefined;
 }
 
-export async function getUsername(keycloak: KeycloakService): Promise<string> {
+export async function getUsername(keycloak: KeycloakService): Promise<string | undefined> {
   const loggedInState = await getLoggedInState(keycloak);
   if (loggedInState) {
     const userProfile = await keycloak.loadUserProfile();
@@ -39,5 +38,14 @@ export async function getUsername(keycloak: KeycloakService): Promise<string> {
     }
   }
 
-  return "";
+  return undefined;
+}
+
+export async function getUserRoles(keycloak: KeycloakService): Promise<string[] | undefined> {
+  const loggedInState = await getLoggedInState(keycloak);
+  if (loggedInState) {
+    return await keycloak.getUserRoles(true);
+  }
+
+  return undefined;
 }

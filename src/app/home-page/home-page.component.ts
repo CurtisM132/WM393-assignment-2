@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 /**
  * Component to hold all other components to display the Home page
@@ -8,10 +10,29 @@ import { Component } from '@angular/core';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  public isTutor: boolean = false;
 
-  // TODO: Use authentication system
-  public authenticated = true;
+  public destroyed$: Subject<void> = new Subject<void>();
+
+  constructor(
+    private authenticationService: AuthenticationService,
+  ) { }
+
+  ngOnInit(): void {
+    this.authenticationService.haveRoles$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(haveRoles => {
+        if (haveRoles) {
+          this.isTutor = this.authenticationService.isTutor();
+        } else {
+          this.isTutor = false;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+  }
 }

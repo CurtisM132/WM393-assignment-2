@@ -1,17 +1,17 @@
-import { Component, Input, ViewChild, AfterViewInit, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Resource } from '../shared/resource.interface';
-import { fileExtensionToFileType } from '../shared/resource-file.enums';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 
 @Component({
   selector: 'app-resource-table',
   templateUrl: './resource-table.component.html',
   styleUrls: ['./resource-table.component.css']
 })
-export class ResourceTableComponent implements AfterViewInit, OnInit {
+export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @Input() resources: Observable<Resource[]>;
 
@@ -20,8 +20,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  // TODO: Use authenication system
-  public authenticated = true;
+  public isTutor: boolean = false;
 
   public dataSource = new MatTableDataSource<Resource>();
   public readonly columns = [
@@ -53,21 +52,38 @@ export class ResourceTableComponent implements AfterViewInit, OnInit {
   ];
   public readonly displayedColumns = this.columns.map(c => c.columnDef);
 
-  constructor() { }
+  public destroyed$: Subject<void> = new Subject<void>();
+
+  constructor(
+    private authenticationService: AuthenticationService,
+  ) { }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
-    // If the user is a tutor then enable the delete column (the delete row button)
-    if (this.authenticated) {
-      this.displayedColumns.push('delete');
-    }
+    this.authenticationService.haveRoles$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(haveRoles => {
+        if (haveRoles) {
+          this.isTutor = this.authenticationService.isTutor();
+          // If the user is a tutor then enable the delete column (the delete row button)
+          if (this.isTutor) {
+            this.displayedColumns.push('delete');
+          }
+        } else {
+          this.isTutor = false;
+        }
+      });
 
     this.resources.subscribe(resources => {
       this.dataSource.data = resources;
     })
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   public handleRowClick(row: Resource): void {

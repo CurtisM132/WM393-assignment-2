@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ResourceBoardSummary } from '../shared/resource-board.interface';
 
 @Component({
@@ -13,16 +15,33 @@ export class ResourceBoardDisplayListComponent implements OnInit {
   @Output() deleteResourceBoardEvent = new EventEmitter<string>();
   @Output() selectionChangeEvent = new EventEmitter<ResourceBoardSummary>();
 
-  // TODO: Use authenication system
-  public authenticated = true;
+  public isTutor: boolean = false;
   public selectedOptions: ResourceBoardSummary[] = [];
 
-  constructor() { }
+  public destroyed$: Subject<void> = new Subject<void>();
+
+  constructor(
+    private authenticationService: AuthenticationService,
+  ) { }
 
   ngOnInit() {
-    this.selectedOptions[0] = this.resourceBoards[0];
+    this.authenticationService.haveRoles$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(haveRoles => {
+        if (haveRoles) {
+          this.isTutor = this.authenticationService.isTutor();
+        } else {
+          this.isTutor = false;
+        }
+      });
 
+    // Select the first resource board automatically on page load
+    this.selectedOptions[0] = this.resourceBoards[0];
     this.onSelectionChange();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   public onSelectionChange(): void {

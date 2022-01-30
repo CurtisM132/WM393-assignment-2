@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
-import { InitialiseKeycloak } from './keycloak';
+import { InitialiseKeycloak } from './authentication/keycloak';
 
 import { ResourceBoardModule } from './resource-board/resource-board.module';
 import { HomePageComponent } from './home-page/home-page.component';
