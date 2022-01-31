@@ -4,14 +4,14 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from '../../authentication/authentication.service';
 
 /**
- * Component to hold all other components to display the Home page
+ * TODO
  */
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './function-home-page.component.html',
-  styleUrls: ['./function-home-page.component.css']
+  selector: 'app-teaching-module-functions-page',
+  templateUrl: './teaching-module-functions-page.component.html',
+  styleUrls: ['./teaching-module-functions-page.component.css']
 })
-export class FunctionHomePageComponent implements OnInit, OnDestroy {
+export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
 
   public isTutor: boolean = false;
 

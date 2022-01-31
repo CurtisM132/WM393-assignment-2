@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-function-sidenav',
-  templateUrl: './function-sidenav.component.html'
+  selector: 'app-teaching-module-functions-sidenav',
+  templateUrl: './teaching-module-functions-sidenav.component.html'
 })
-export class FunctionSidenavComponent {
+export class TeachingModuleFunctionsSidenavComponent {
 
   constructor(
     private router: Router,

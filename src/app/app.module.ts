@@ -9,7 +9,7 @@ import { MaterialModule } from './material.module';
 
 import { InitialiseKeycloak } from './authentication/keycloak';
 
-import { ModuleFunctionModule } from './module-function/module-function.module';
+import { ModuleFunctionsModule } from './teaching-module-functions/module-functions.module';
 import { TeachingModulesModule } from './teaching-modules/teaching-modules.module';
 import { ResourceBoardModule } from './resource-board/resource-board.module';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -30,7 +30,7 @@ import { AccountSettingsMenuComponent } from './account-settings-menu/account-se
     KeycloakAngularModule,
     MaterialModule,
     TeachingModulesModule,
-    ModuleFunctionModule,
+    ModuleFunctionsModule,
     ResourceBoardModule,
   ],
   providers: [
