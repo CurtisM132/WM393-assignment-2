@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 
 import { ModuleHomePageComponent } from './page/teaching-modules-page.component';
-import { ModuleSidenavComponent } from './sidenav/teaching-modules-sidenav.component';
+import { AbstractTeachingModulesService } from './shared/teaching-modules.abstract.service';
+import { MockTeachingModulesService } from './shared/teaching-modules.mock.service';
 
 
 @NgModule({
   declarations: [
     ModuleHomePageComponent,
-    ModuleSidenavComponent,
   ],
   imports: [
     CommonModule,
@@ -18,9 +18,10 @@ import { ModuleSidenavComponent } from './sidenav/teaching-modules-sidenav.compo
     AppRoutingModule,
   ],
   exports: [
-    ModuleSidenavComponent,
     ModuleHomePageComponent,
   ],
-  providers: []
+  providers: [
+    { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService }
+  ]
 })
 export class TeachingModulesModule { }
