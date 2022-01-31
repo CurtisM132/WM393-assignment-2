@@ -9,8 +9,9 @@ import { MaterialModule } from './material.module';
 
 import { InitialiseKeycloak } from './authentication/keycloak';
 
+import { ModuleFunctionModule } from './module-function/module-function.module';
+import { TeachingModulesModule } from './teaching-modules/teaching-modules.module';
 import { ResourceBoardModule } from './resource-board/resource-board.module';
-import { HomePageComponent } from './home-page/home-page.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AccountSettingsMenuComponent } from './account-settings-menu/account-settings-menu.component';
@@ -18,7 +19,6 @@ import { AccountSettingsMenuComponent } from './account-settings-menu/account-se
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
     SidenavComponent,
     ToolbarComponent,
     AccountSettingsMenuComponent,
@@ -29,6 +29,8 @@ import { AccountSettingsMenuComponent } from './account-settings-menu/account-se
     BrowserAnimationsModule,
     KeycloakAngularModule,
     MaterialModule,
+    TeachingModulesModule,
+    ModuleFunctionModule,
     ResourceBoardModule,
   ],
   providers: [

@@ -32,7 +32,7 @@ export class ResourcesContainerComponent implements OnInit {
     // then load the resources associated with that resource board
     this.route.paramMap
       .subscribe((params: any) => {
-        this.resourceBoardId = params.get('id');
+        this.resourceBoardId = params.get('boardId');
         this.getResources();
       })
   }

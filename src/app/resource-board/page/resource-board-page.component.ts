@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 
 import { AbstractResourceBoardService } from '../board/shared/resource-board.abstract-service';
 import { ResourceBoardSummary } from '../board/shared/resource-board.interface';
@@ -11,16 +13,35 @@ import { ResourceBoardSummary } from '../board/shared/resource-board.interface';
 })
 export class ResourceBoardPageComponent implements OnInit {
 
-  public authenticated = true;
+  public isTutor: boolean = false;
   public resourceBoards: ResourceBoardSummary[] = [];
 
+  public destroyed$: Subject<void> = new Subject<void>();
+
   constructor(
-    private resourceBoardService: AbstractResourceBoardService,
     private router: Router,
+    private route: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private resourceBoardService: AbstractResourceBoardService,
   ) { }
 
   ngOnInit(): void {
+    // Subscribe to the users account roles then get if they're a tutor or not
+    this.authenticationService.haveRoles$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(haveRoles => {
+        if (haveRoles) {
+          this.isTutor = this.authenticationService.isTutor();
+        } else {
+          this.isTutor = false;
+        }
+      });
+
     this.fetchResourceBoards();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   private fetchResourceBoards(): void {
@@ -56,7 +77,11 @@ export class ResourceBoardPageComponent implements OnInit {
   }
 
   public handleBoardSelection(board: ResourceBoardSummary): void {
-    this.router.navigate(['/resource', board.id]);
+    // this.router.navigate([{ outlets: { "main-content": '/resource', board.id }]);
+    // this.router.navigate(['/resource', { outlets: { "main-content": ['/resource', board.id], "sidenav": '/resource' } }]);
+    // this.router.navigate(['/resource', board.id, { outlets: { sidenav: '/function-sidenav' } }]);
+    this.router.navigate([board.id], { relativeTo: this.route });
+
   }
 
 }
