@@ -4,77 +4,89 @@ import { saveAs } from 'file-saver';
 
 import { Resource } from './resource.interface';
 import { AbstractResourceService } from './resource.abstract-service';
-import { ACCEPTED_FILE_EXTENSIONS, FILE_TYPE } from './resource-file.enums';
+import { mockBoardResources } from './resource.mock.data';
+import { BoardResources } from './board.resources.interface';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MockResourceService implements AbstractResourceService {
 
-  private mockResources: Resource[] = [
-    {
-      id: '1',
-      name: '3D Cartography Example',
-      uploadDate: new Date("2021-10-30"),
-      fileType: FILE_TYPE.IMAGE,
-      fileFormat: ACCEPTED_FILE_EXTENSIONS.JPEG,
-      filePath: './assets/demo-resources/cartographic_example.png',
-      comment: 'An example of the map I want you to produce for your project'
-    },
-    {
-      id: '2',
-      name: 'How to Setup ArcGIS',
-      uploadDate: new Date("2022-01-13"),
-      fileType: FILE_TYPE.VIDEO,
-      fileFormat: ACCEPTED_FILE_EXTENSIONS.MP4,
-      filePath: './assets/demo-resources/arcgis_setup.mp4',
-    }
-  ];
+  private mockBoardResources: BoardResources[] = mockBoardResources;
 
   constructor() { }
 
-  public getResources(boardId: string): Observable<Resource[]> {
-    return of(this.mockResources);
+  public getResources(boardId: string): Observable<Resource[] | undefined> {
+    const index = this.mockBoardResources.findIndex(x => x.id === boardId)
+    if (index > -1) {
+      return of(this.mockBoardResources[index].resources);
+    }
+
+    return of(undefined)
   }
 
   public getResource(boardId: string, resourceId: string): Observable<Resource | undefined> {
-    const index = this.mockResources.findIndex(resource => resource.id === resourceId);
-    if (index > -1) {
-      return of(this.mockResources[index]);
+    // Find the appropriate resource board
+    const boardIndex = this.mockBoardResources.findIndex(x => x.id === boardId)
+    if (boardIndex > -1) {
+      // Find the appropriate resource
+      const resourceIndex = this.mockBoardResources[boardIndex].resources
+        .findIndex(resource => resource.id === resourceId);
+
+      if (resourceIndex > -1) {
+        return of(this.mockBoardResources[boardIndex].resources[resourceIndex]);
+      }
     }
 
     return of(undefined);
   }
 
-  public uploadResource(resource: Resource): Observable<{ id: string, success: boolean }> {
-    const id = (this.mockResources.length + 1).toString();
+  public uploadResource(boardId: string, resource: Resource): Observable<{ id: string, success: boolean }> {
+    // Find the appropriate resource board
+    const boardIndex = this.mockBoardResources.findIndex(x => x.id === boardId)
+    if (boardIndex > -1) {
+      const id = (this.mockBoardResources[boardIndex].resources.length + 1).toString();
 
-    this.mockResources.push({
-      id,
-      ...resource,
-    });
+      // Push the resource into that board's resources
+      this.mockBoardResources[boardIndex].resources.push({
+        id,
+        ...resource,
+      });
 
-    return of({ id, success: true });
+      return of({ id, success: true });
+    }
+
+    return of({ id: "", success: false });
   }
 
-  public deleteResource(id: string): Observable<boolean> {
-    if (id && id !== "") {
-      this.mockResources = this.mockResources
-        .filter((resourceBoard: Resource) => resourceBoard.id !== id);
+  public deleteResource(boardId: string, resourceId: string): Observable<boolean> {
+    // Find the appropriate resource board
+    const boardIndex = this.mockBoardResources.findIndex(x => x.id === boardId)
+    if (boardIndex > -1) {
+      if (resourceId && resourceId !== "") {
+        this.mockBoardResources[boardIndex].resources =
+          this.mockBoardResources[boardIndex].resources.filter((resourceBoard: Resource) => resourceBoard.id !== resourceId);
 
-      return of(true);
+        return of(true);
+      }
     }
+
 
     return of(false);
   }
 
-  public downloadResource(id: string): Observable<boolean> {
-    if (id && id !== "") {
-      const resource = this.mockResources.find(x => x.id === id)
-      if (resource) {
-        saveAs(resource.filePath, `${resource.name}.${resource.fileFormat}`);
-
-        return of(true);
+  public downloadResource(boardId: string, resourceId: string): Observable<boolean> {
+    // Find the appropriate resource board
+    const boardIndex = this.mockBoardResources.findIndex(x => x.id === boardId)
+    if (boardIndex > -1) {
+      if (resourceId && resourceId !== "") {
+        const resource = this.mockBoardResources[boardIndex].resources.find(x => x.id === resourceId)
+        if (resource) {
+          saveAs(resource.filePath, `${resource.name}.${resource.fileFormat}`);
+  
+          return of(true);
+        }
       }
     }
 

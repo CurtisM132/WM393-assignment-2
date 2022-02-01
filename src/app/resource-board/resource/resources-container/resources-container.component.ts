@@ -45,7 +45,6 @@ export class ResourcesContainerComponent implements OnInit {
 
   public handleResourceClicked(resource: Resource): void {
     if (resource.fileType === FILE_TYPE.IMAGE || resource.fileType === FILE_TYPE.VIDEO) {
-      // Navigate to /resource/boardId/resourceId
       // This route corresponds with a resource display component (see routing module)
       this.router.navigate([resource.id], { relativeTo: this.route });
     } else {
@@ -55,15 +54,19 @@ export class ResourcesContainerComponent implements OnInit {
 
   public getResources(): void {
     this.resourceService.getResources(this.resourceBoardId)
-      .subscribe((resources: Resource[]) => {
-        this.resources$.next(resources);
-        this.resources = resources;
+      .subscribe((resources) => {
+        if (resources) {
+          this.resources$.next(resources);
+          this.resources = resources;
+        } else {
+          console.error("Failed to get Resource Board's Resources")
+        }
       })
   }
 
   public downloadResource(resource: Resource): void {
     if (resource.id) {
-      this.resourceService.downloadResource(resource.id)
+      this.resourceService.downloadResource(this.resourceBoardId, resource.id)
         .subscribe((success: boolean) => {
           if (!success) {
             console.error("Failed to download resource");
@@ -76,7 +79,7 @@ export class ResourcesContainerComponent implements OnInit {
 
   public deleteResource(id: string): void {
     if (id) {
-      this.resourceService.deleteResource(id)
+      this.resourceService.deleteResource(this.resourceBoardId, id)
         .subscribe((success: boolean) => {
           if (success) {
             this.getResources();
@@ -92,7 +95,7 @@ export class ResourcesContainerComponent implements OnInit {
   public uploadResource(file: FileHandle): void {
     const fileName = file.file.name.split(".")[0];
     const fileExt = file.file.name.split(".")[1];
-    
+
     // Check if the file extension is acceptable
     if (Object.values<string>(ACCEPTED_FILE_EXTENSIONS).includes(fileExt)) {
       const resource: Resource = {
@@ -103,18 +106,18 @@ export class ResourcesContainerComponent implements OnInit {
         filePath: file.plainUrl,
       };
 
-      this.resourceService.uploadResource(resource)
+      this.resourceService.uploadResource(this.resourceBoardId, resource)
         .subscribe(({ id, success }) => {
           if (success) {
             this.getResources();
           } else {
-            console.error("Failed to delete resource");
+            console.error("Failed to upload resource");
           }
         });
+    } else {
+      // TODO: Indicate in a visual way to the user that the file type is not acceptable
+      console.error(`File extension (${fileExt}) not acceptable`);
     }
-
-    // TODO: Indicate in a visual way to the user that the file type is not acceptable
-    console.error(`File extension (${fileExt}) not acceptable`);
   }
 
 }

@@ -52,6 +52,16 @@ export class ResourceBoardDisplayListComponent implements OnInit {
     event.stopPropagation();
 
     this.deleteResourceBoardEvent.emit(id);
+    
+    // If the user deletes the resource board they are currently viewing 
+    // then select the new first resource board in the display list
+    // TODO: This works but doesn't trigger a selection/ripple in the Mat Selection List
+    setTimeout(() => {
+      if (this.selectedOptions[0].id === id) {
+        this.selectedOptions[0] = this.resourceBoards[0];
+        this.onSelectionChange();
+      }
+    });
   }
 
 }
