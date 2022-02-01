@@ -28,6 +28,19 @@ export async function getUserProfile(keycloak: KeycloakService): Promise<Keycloa
   return undefined;
 }
 
+export async function getUserId(keycloak: KeycloakService): Promise<string | undefined> {
+  const loggedInState = await getLoggedInState(keycloak);
+  if (loggedInState) {
+    const userProfile = await keycloak.loadUserProfile();
+
+    if (userProfile && userProfile.id) {
+      return userProfile.id as string;
+    }
+  }
+
+  return undefined;
+}
+
 export async function getUsername(keycloak: KeycloakService): Promise<string | undefined> {
   const loggedInState = await getLoggedInState(keycloak);
   if (loggedInState) {

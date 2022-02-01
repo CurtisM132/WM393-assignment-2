@@ -26,7 +26,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'function', component: TeachingModuleFunctionsSidenavComponent, outlet: "sidenav" },
+  { path: ':id', component: TeachingModuleFunctionsSidenavComponent, outlet: "sidenav" },
 ];
 
 @NgModule({

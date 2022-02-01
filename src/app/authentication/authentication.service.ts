@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { BehaviorSubject } from 'rxjs';
-import { getLoggedInState, getUsername, getUserRoles } from './keycloak';
+import { getLoggedInState, getUserId, getUsername, getUserRoles } from './keycloak';
 
 
 @Injectable({
@@ -13,6 +13,7 @@ export class AuthenticationService {
   private readonly STUDENT_ROLE = "wmgtss-student";
 
   public loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public userId$: BehaviorSubject<string> = new BehaviorSubject<string>("");
   public username$: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
   private roles: string[] = [];
@@ -21,10 +22,18 @@ export class AuthenticationService {
   constructor(private keycloakService: KeycloakService) {
     const i = setInterval(() => {
       getLoggedInState(this.keycloakService)
-        .then(loggedInState => {
-          this.loggedIn$.next(loggedInState);
+        .then(loggedIn => {
+          this.loggedIn$.next(loggedIn);
 
-          if (loggedInState) {
+          if (loggedIn) {
+            // Get the account id
+            getUserId(this.keycloakService)
+              .then(userId => {
+                if (userId) {
+                  this.userId$.next(userId);
+                }
+              });
+
             // Get the account username
             getUsername(this.keycloakService)
               .then(username => {

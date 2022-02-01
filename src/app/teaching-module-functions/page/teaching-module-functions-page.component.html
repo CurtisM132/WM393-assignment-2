@@ -1,50 +1,8 @@
 <div class="home-cards-container">
-    <mat-card class="home-card" [routerLink]="'/'">
+    <mat-card *ngFor="let function of moduleFunctions" class="home-card" (click)="handleNavigation(function)">
         <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">calendar_today</mat-icon>
-            <h2>Calendar</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="home-card">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">quiz</mat-icon>
-            <h2>Quiz</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="home-card" style="cursor: pointer;" (click)="handleNavigation('resource')">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">content_copy</mat-icon>
-            <h2>Resource</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="home-card">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">format_list_bulleted</mat-icon>
-            <h2>Notice</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="home-card">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">question_answer</mat-icon>
-            <h2>Q & A</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="home-card">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">chat</mat-icon>
-            <h2>Feedback</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card *ngIf="isTutor" class="home-card">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">add</mat-icon>
-            <h2>New</h2>
+            <mat-icon matListIcon class="home-card-icon">{{teachingModuleFunctionToMaterialIcon(function)}}</mat-icon>
+            <h2>{{function}}</h2>
         </mat-card-content>
     </mat-card>
 </div>

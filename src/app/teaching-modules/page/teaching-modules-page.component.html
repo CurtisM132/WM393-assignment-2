@@ -1,15 +1,7 @@
 <div class="home-cards-container">
-    <mat-card class="home-card" (click)="handleModuleSelection()">
+    <mat-card *ngFor="let module of teachingModules" class="home-card" (click)="handleModuleSelection(module.id)">
         <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">calendar_today</mat-icon>
-            <h2>Example #1</h2>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="home-card">
-        <mat-card-content>
-            <mat-icon matListIcon class="home-card-icon">quiz</mat-icon>
-            <h2>Example #2</h2>
+            <h2>{{module.name}}</h2>
         </mat-card-content>
     </mat-card>
 </div>

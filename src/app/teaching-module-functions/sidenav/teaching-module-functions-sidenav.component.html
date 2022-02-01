@@ -3,27 +3,7 @@
         <mat-icon class="sidebar-icon">home</mat-icon>
     </a>
 
-    <a mat-list-item>
-        <mat-icon class="sidebar-icon">calendar_today</mat-icon>
-    </a>
-
-    <a mat-list-item>
-        <mat-icon class="sidebar-icon">quiz</mat-icon>
-    </a>
-
-    <a mat-list-item (click)="handleNavigation('resource')">
-        <mat-icon class="sidebar-icon">content_copy</mat-icon>
-    </a>
-
-    <a mat-list-item>
-        <mat-icon class="sidebar-icon">format_list_bulleted</mat-icon>
-    </a>
-
-    <a mat-list-item>
-        <mat-icon class="sidebar-icon">question_answer</mat-icon>
-    </a>
-
-    <a mat-list-item>
-        <mat-icon class="sidebar-icon">chat</mat-icon>
+    <a mat-list-item *ngFor="let function of moduleFunctions" (click)="handleNavigation(function)">
+        <mat-icon class="sidebar-icon">{{teachingModuleFunctionToMaterialIcon(function)}}</mat-icon>
     </a>
 </mat-nav-list>

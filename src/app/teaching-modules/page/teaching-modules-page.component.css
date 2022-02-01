@@ -4,8 +4,8 @@
 }
 
 .home-card {
-    width: 18rem;
-    height: 15rem;
+    width: 15rem;
+    height: 12rem;
 
     min-width: 10rem;
     min-height: 7rem;
@@ -13,15 +13,8 @@
     margin: 2rem;
 
     background-color: #F0F0F0;
-}
 
-.home-card-icon {
-    width: fit-content;
-    height: fit-content;
-
-    margin: auto !important;
-
-    font-size: 4rem;
+    cursor: pointer;
 }
 
 mat-card-content {

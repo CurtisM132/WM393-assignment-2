@@ -77,11 +77,7 @@ export class ResourceBoardPageComponent implements OnInit {
   }
 
   public handleBoardSelection(board: ResourceBoardSummary): void {
-    // this.router.navigate([{ outlets: { "main-content": '/resource', board.id }]);
-    // this.router.navigate(['/resource', { outlets: { "main-content": ['/resource', board.id], "sidenav": '/resource' } }]);
-    // this.router.navigate(['/resource', board.id, { outlets: { sidenav: '/function-sidenav' } }]);
     this.router.navigate([board.id], { relativeTo: this.route });
-
   }
 
 }

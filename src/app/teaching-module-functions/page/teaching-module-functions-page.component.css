@@ -13,6 +13,8 @@
     margin: 2rem;
 
     background-color: #F0F0F0;
+
+    cursor: pointer;
 }
 
 .home-card-icon {

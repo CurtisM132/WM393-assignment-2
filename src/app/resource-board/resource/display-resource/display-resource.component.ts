@@ -41,7 +41,7 @@ export class DisplayResourceComponent implements OnInit {
               }
             });
         }
-      })
+      });
   }
 
   public handleClose() {
