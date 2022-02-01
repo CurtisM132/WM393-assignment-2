@@ -1,9 +1,9 @@
 <mat-nav-list>
     <a mat-list-item [routerLink]="'/'">
-        <mat-icon class="sidebar-icon">home</mat-icon>
+        <mat-icon class="sidenav-icon">home</mat-icon>
     </a>
 
     <a mat-list-item *ngFor="let function of moduleFunctions" (click)="handleNavigation(function)">
-        <mat-icon class="sidebar-icon">{{teachingModuleFunctionToMaterialIcon(function)}}</mat-icon>
+        <mat-icon class="sidenav-icon">{{teachingModuleFunctionToMaterialIcon(function)}}</mat-icon>
     </a>
 </mat-nav-list>

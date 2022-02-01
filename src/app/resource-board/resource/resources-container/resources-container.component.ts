@@ -47,7 +47,7 @@ export class ResourcesContainerComponent implements OnInit {
     if (resource.fileType === FILE_TYPE.IMAGE || resource.fileType === FILE_TYPE.VIDEO) {
       // Navigate to /resource/boardId/resourceId
       // This route corresponds with a resource display component (see routing module)
-      this.router.navigate([`/resource`, this.resourceBoardId, resource.id]);
+      this.router.navigate([resource.id], { relativeTo: this.route });
     } else {
       this.downloadResource(resource);
     }
@@ -90,10 +90,10 @@ export class ResourcesContainerComponent implements OnInit {
   }
 
   public uploadResource(file: FileHandle): void {
-    // Check if the file extension is acceptable
     const fileName = file.file.name.split(".")[0];
     const fileExt = file.file.name.split(".")[1];
-
+    
+    // Check if the file extension is acceptable
     if (Object.values<string>(ACCEPTED_FILE_EXTENSIONS).includes(fileExt)) {
       const resource: Resource = {
         name: fileName,
@@ -102,7 +102,7 @@ export class ResourcesContainerComponent implements OnInit {
         fileFormat: fileExt as ACCEPTED_FILE_EXTENSIONS,
         filePath: file.plainUrl,
       };
-  
+
       this.resourceService.uploadResource(resource)
         .subscribe(({ id, success }) => {
           if (success) {
@@ -113,7 +113,8 @@ export class ResourcesContainerComponent implements OnInit {
         });
     }
 
-    // TODO: Indicate to the user that the file type is not acceptable
+    // TODO: Indicate in a visual way to the user that the file type is not acceptable
+    console.error(`File extension (${fileExt}) not acceptable`);
   }
 
 }

@@ -1,3 +1,4 @@
 .toolbar-title {
     margin: 0 auto;
+    user-select: none
 }
