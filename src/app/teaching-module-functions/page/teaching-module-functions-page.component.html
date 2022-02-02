@@ -1,6 +1,10 @@
 <div class="home-cards-container">
     <mat-card *ngFor="let function of moduleFunctions" class="home-card" (click)="handleNavigation(function)">
         <mat-card-content>
+            <button mat-icon-button *ngIf="isTutor" matTooltip="Delete" class="delete-button" (click)="$event.stopPropagation();handleDeleteFunction(function)">
+                <mat-icon aria-label="Delete resource">delete</mat-icon>
+            </button>
+
             <mat-icon matListIcon class="home-card-icon">{{teachingModuleFunctionToMaterialIcon(function)}}</mat-icon>
             <h2>{{function}}</h2>
         </mat-card-content>

@@ -18,6 +18,8 @@ import { TEACHING_MODULE_FUNCTIONS, teachingModuleFunctionToMaterialIcon } from 
 export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
 
   public isTutor: boolean = false;
+
+  private moduleId: string;
   public moduleFunctions: TEACHING_MODULE_FUNCTIONS[] = [];
 
   public destroyed$: Subject<void> = new Subject<void>();
@@ -35,18 +37,13 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap
       .subscribe((params: any) => {
-        const moduleId = params.get('id');
+        this.moduleId = params.get('id');
 
-        if (moduleId) {
+        if (this.moduleId) {
           // Open the function sidebar
-          this.router.navigate([{ outlets: { sidenav: [moduleId] } }]);
+          this.router.navigate([{ outlets: { sidenav: [this.moduleId] } }]);
 
-          this.teachingModulesService.getTeachingModule(moduleId)
-            .subscribe((teachingModule) => {
-              if (teachingModule) {
-                this.moduleFunctions = teachingModule.functions;
-              }
-            });
+          this.getModuleFunctions();
         }
       })
 
@@ -64,6 +61,26 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed$.next();
+  }
+
+  public getModuleFunctions() {
+    this.teachingModulesService.getTeachingModule(this.moduleId)
+      .subscribe((teachingModule) => {
+        if (teachingModule) {
+          this.moduleFunctions = teachingModule.functions;
+        }
+      });
+  }
+
+  public handleDeleteFunction(moduleFunction: TEACHING_MODULE_FUNCTIONS) {
+    this.teachingModulesService.deleteModuleFunction(this.moduleId, moduleFunction)
+      .subscribe((success: boolean) => {
+        if (!success) {
+          console.error("Failed to delete module function: ", moduleFunction);
+        } else {
+          this.getModuleFunctions();
+        }
+      })
   }
 
   /**

@@ -72,7 +72,6 @@ export class MockResourceService implements AbstractResourceService {
       }
     }
 
-
     return of(false);
   }
 

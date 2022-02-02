@@ -79,4 +79,16 @@ export class MockTeachingModulesService implements AbstractTeachingModulesServic
     return of(undefined)
   }
 
+  public deleteModuleFunction(moduleId: string, moduleFunction: TEACHING_MODULE_FUNCTIONS): Observable<boolean> {
+    const index = this.mockTeachingModules.findIndex(x => x.id === moduleId)
+    if (index > -1) {
+      this.mockTeachingModules[index].functions =
+        this.mockTeachingModules[index].functions.filter((x: TEACHING_MODULE_FUNCTIONS) => x !== moduleFunction);
+
+      return of(true);
+    }
+
+    return of(false);
+  }
+
 }

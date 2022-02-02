@@ -10,7 +10,7 @@
 
   <!-- Display row (and therefore resource) delete button -->
   <ng-container matColumnDef="delete">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef mat-sort-header style="user-select: none"></th>
     <td mat-cell *matCellDef="let row">
       <button mat-icon-button matTooltip="Delete" (click)="$event.stopPropagation();handleDelete(row)">
         <mat-icon aria-label="Delete resource">delete</mat-icon>
