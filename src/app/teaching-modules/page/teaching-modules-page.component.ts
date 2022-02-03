@@ -13,7 +13,7 @@ import { TeachingModule } from '../shared/teaching-modules.interface';
   templateUrl: './teaching-modules-page.component.html',
   styleUrls: ['./teaching-modules-page.component.css']
 })
-export class ModuleHomePageComponent implements OnInit {
+export class TeachingModulesPageComponent implements OnInit {
 
   public teachingModules: TeachingModule[] = [];
 

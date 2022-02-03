@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 
-import { ModuleHomePageComponent } from './page/teaching-modules-page.component';
+import { TeachingModulesPageComponent } from './page/teaching-modules-page.component';
 import { AbstractTeachingModulesService } from './shared/teaching-modules.abstract.service';
 import { MockTeachingModulesService } from './shared/teaching-modules.mock.service';
 
 
 @NgModule({
   declarations: [
-    ModuleHomePageComponent,
+    TeachingModulesPageComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +18,7 @@ import { MockTeachingModulesService } from './shared/teaching-modules.mock.servi
     AppRoutingModule,
   ],
   exports: [
-    ModuleHomePageComponent,
+    TeachingModulesPageComponent,
   ],
   providers: [
     { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService }

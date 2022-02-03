@@ -2,7 +2,8 @@ import { BoardResources } from "./board.resources.interface";
 import { FILE_TYPE, ACCEPTED_FILE_EXTENSIONS } from "./resource-file.enums";
 import { Resource } from "./resource.interface";
 
-const mockResources: Resource[] = [
+// Exported for use in unit tests
+export const mockResources: Resource[] = [
     {
         id: '1',
         name: '3D Cartography Example',

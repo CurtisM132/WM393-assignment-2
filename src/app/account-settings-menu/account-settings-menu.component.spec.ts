@@ -1,4 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { KeycloakService } from 'keycloak-angular';
+
+import { MaterialModule } from '../material.module';
+import { AuthenticationService } from '../authentication/authentication.service';
+import { MockKeycloakService } from '../authentication/mock-keycloak-service';
 
 import { AccountSettingsMenuComponent } from './account-settings-menu.component';
 
@@ -8,7 +15,15 @@ describe('AccountSettingsMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountSettingsMenuComponent ]
+      declarations: [ AccountSettingsMenuComponent ],
+      imports: [
+        CommonModule,
+        MaterialModule,
+      ],
+      providers: [
+        { provide: KeycloakService, useClass: MockKeycloakService },
+        { provide: AuthenticationService, useClass: AuthenticationService },
+      ],
     })
     .compileComponents();
   });

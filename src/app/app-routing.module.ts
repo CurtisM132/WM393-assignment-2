@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ModuleHomePageComponent } from './teaching-modules/page/teaching-modules-page.component';
+import { TeachingModulesPageComponent } from './teaching-modules/page/teaching-modules-page.component';
 import { TeachingModuleFunctionsPageComponent } from './teaching-module-functions/page/teaching-module-functions-page.component';
 import { TeachingModuleFunctionsSidenavComponent } from './teaching-module-functions/sidenav/teaching-module-functions-sidenav.component';
 import { ResourceBoardPageComponent } from './resource-board/page/resource-board-page.component';
@@ -10,7 +10,7 @@ import { ResourcesContainerComponent } from './resource-board/resource/resources
 
 
 const routes: Routes = [
-  { path: '', component: ModuleHomePageComponent },
+  { path: '', component: TeachingModulesPageComponent },
   { path: ':id', component: TeachingModuleFunctionsPageComponent },
   {
     path: ':id/resource',

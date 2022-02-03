@@ -54,7 +54,9 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
   ) { }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
+    if (this.sort) {
+      this.dataSource.sort = this.sort;
+    }
   }
 
   ngOnInit(): void {

@@ -28,10 +28,10 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
   public teachingModuleFunctionToMaterialIcon = teachingModuleFunctionToMaterialIcon;
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private teachingModulesService: AbstractTeachingModulesService,
     private router: Router,
     private route: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private teachingModulesService: AbstractTeachingModulesService,
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +44,8 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
           this.router.navigate([{ outlets: { sidenav: [this.moduleId] } }]);
 
           this.getModuleFunctions();
+        } else {
+          console.error("No module ID supplied in Route")
         }
       })
 

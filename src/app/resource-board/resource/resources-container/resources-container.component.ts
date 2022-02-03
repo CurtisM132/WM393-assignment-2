@@ -59,7 +59,7 @@ export class ResourcesContainerComponent implements OnInit {
           this.resources$.next(resources);
           this.resources = resources;
         } else {
-          console.error("Failed to get Resource Board's Resources")
+          console.error(`Failed to get Resource Board's Resources for Resource Board ID: ${this.resourceBoardId}`);
         }
       })
   }

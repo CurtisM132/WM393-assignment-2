@@ -18,9 +18,9 @@ export class TeachingModuleFunctionsSidenavComponent {
   public teachingModuleFunctionToMaterialIcon = teachingModuleFunctionToMaterialIcon;
 
   constructor(
-    private teachingModulesService: AbstractTeachingModulesService,
     private router: Router,
     private route: ActivatedRoute,
+    private teachingModulesService: AbstractTeachingModulesService,
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +37,10 @@ export class TeachingModuleFunctionsSidenavComponent {
             });
         }
       });
+  }
+
+  public handleNavigateToModules(): void {
+    this.router.navigate([""]);
   }
 
   public handleNavigation(path: TEACHING_MODULE_FUNCTIONS): void {

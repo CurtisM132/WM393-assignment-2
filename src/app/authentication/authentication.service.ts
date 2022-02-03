@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { BehaviorSubject } from 'rxjs';
-import { getLoggedInState, getUserId, getUsername, getUserRoles } from './keycloak';
+import { getLoggedInState, getUserId, getUsername, getUserRoles } from './keycloak-utils';
 
 
 @Injectable({
