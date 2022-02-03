@@ -48,6 +48,10 @@ body {
     padding-right: 0px !important;
 }
 
+.mat-form-field-wrapper {
+    padding-bottom: 0.2rem;
+}
+
 .sidenav {
     width: fit-content;
     height: 100%;

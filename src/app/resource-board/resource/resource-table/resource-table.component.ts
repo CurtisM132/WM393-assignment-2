@@ -44,13 +44,8 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
       header: 'File Format',
       cell: (resource: Resource) => `${resource.fileFormat.toLocaleUpperCase()}`,
     },
-    {
-      columnDef: 'comment',
-      header: 'Comment',
-      cell: (resource: Resource) => `${resource.comment || ''}`,
-    },
   ];
-  public readonly displayedColumns = this.columns.map(c => c.columnDef);
+  public readonly displayedColumns = [...this.columns.map(c => c.columnDef), "comment"];
 
   public destroyed$: Subject<void> = new Subject<void>();
 

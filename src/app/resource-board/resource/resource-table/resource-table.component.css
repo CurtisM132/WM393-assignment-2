@@ -5,3 +5,7 @@
 .mat-row:hover .mat-cell {
     border-color: currentColor;
 }
+
+.comment-form-field {
+    width: 90%;
+}
