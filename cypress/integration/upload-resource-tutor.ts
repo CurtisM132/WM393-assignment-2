@@ -1,7 +1,14 @@
+before(() => {
+    cy.visit('/');
+    // Login as a teacher
+    cy.get('#username').click().type('tutor1');
+    cy.get('#password').click().type('password');
+    cy.get('#kc-login').click();
+});
+
 // Runs through the process of uploading an image to an empty resource board
 describe('Upload Resource', () => {
     it('Should navigate to an empty resource board', () => {
-        cy.visit('/');
         cy.get('.module-cards-container > :nth-child(1)').click();
         cy.get('.function-cards-container > :nth-child(6)').click();
         cy.get('.mat-selection-list > :nth-child(2)').click();
@@ -44,11 +51,5 @@ describe('Upload Resource', () => {
         // Disable drag and drop zone
         cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
         cy.get('.mat-row > .cdk-column-name').should('have.text', ' test-image ');
-    })
-
-    it('Should have the same resource comment', () => {
-        // Disable drag and drop zone
-        cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
-        cy.get('#resource-comment-input').should('have.value', 'Test comment');
     })
 })

@@ -1,6 +1,6 @@
 <div *ngIf="safeToDisplay && resource" class="column-align-full-height">
     <div class="top-bar">
-        <h2 class="resource-name">{{resource.name}}</h2>
+        <h2 id="resource-name" class="resource-name">{{resource.name}}</h2>
         <button mat-raised-button id="close-button" color="primary" class="close-button" (click)="handleClose()">
             Close
         </button>
