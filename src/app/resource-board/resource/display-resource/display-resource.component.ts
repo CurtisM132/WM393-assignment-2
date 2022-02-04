@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FILE_TYPE } from '../shared/resource-file.enums';
-import { AbstractResourceService } from '../shared/resource.abstract-service';
+import { AbstractResourceService } from '../shared/resource.abstract.service';
 import { Resource } from '../shared/resource.interface';
 
 @Component({

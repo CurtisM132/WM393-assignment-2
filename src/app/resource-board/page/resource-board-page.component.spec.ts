@@ -12,7 +12,8 @@ import { MockKeycloakService } from '../../authentication/mock-keycloak-service'
 import { ResourceBoardModule } from '../resource-board.module';
 import { AbstractResourceBoardService } from '../board/shared/resource-board.abstract-service';
 import { MockResourceBoardService } from '../board/shared/resource-board.mock.service';
-import { AuthenticationService } from '../../authentication/authentication.service';
+import { AbstractAuthenticationService } from '../../authentication/authentication.abstract.service';
+import { MockAuthenticationService } from '../../authentication/authentication.mock.service';
 
 import { ResourceBoardPageComponent } from './resource-board-page.component';
 
@@ -38,7 +39,7 @@ describe('ResourceBoardPageComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Router, useValue: routerSpy },
         { provide: KeycloakService, useClass: MockKeycloakService },
-        { provide: AuthenticationService, useClass: AuthenticationService },
+        { provide: AbstractAuthenticationService, useClass: MockAuthenticationService },
         { provide: AbstractResourceBoardService, useClass: MockResourceBoardService },
       ],
     })

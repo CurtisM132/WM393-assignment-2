@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FileHandle } from '../../../file-upload/drag-and-drop-file.directive';
 import { ACCEPTED_FILE_EXTENSIONS, fileExtensionToFileType, FILE_TYPE } from '../shared/resource-file.enums';
 
-import { AbstractResourceService } from '../shared/resource.abstract-service';
+import { AbstractResourceService } from '../shared/resource.abstract.service';
 import { Resource } from '../shared/resource.interface';
 
 @Component({

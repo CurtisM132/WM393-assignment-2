@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 
+import { environment } from 'src/environments/environment';
+
 import { TeachingModulesPageComponent } from './page/teaching-modules-page.component';
-import { AbstractTeachingModulesService } from './shared/teaching-modules.abstract.service';
-import { MockTeachingModulesService } from './shared/teaching-modules.mock.service';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { MockTeachingModulesService } from './shared/teaching-modules.mock.servi
     TeachingModulesPageComponent,
   ],
   providers: [
-    { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService }
+    ...environment.providers,
   ]
 })
 export class TeachingModulesModule { }

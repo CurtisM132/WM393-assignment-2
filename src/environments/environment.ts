@@ -2,15 +2,21 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
-};
+import { AbstractAuthenticationService } from "src/app/authentication/authentication.abstract.service";
+import { MockAuthenticationService } from "src/app/authentication/authentication.mock.service";
+import { AbstractResourceBoardService } from "src/app/resource-board/board/shared/resource-board.abstract-service";
+import { MockResourceBoardService } from "src/app/resource-board/board/shared/resource-board.mock.service";
+import { AbstractResourceService } from "src/app/resource-board/resource/shared/resource.abstract.service";
+import { MockResourceService } from "src/app/resource-board/resource/shared/resource.mock.service";
+import { AbstractTeachingModulesService } from "src/app/teaching-modules/shared/teaching-modules.abstract.service";
+import { MockTeachingModulesService } from "src/app/teaching-modules/shared/teaching-modules.mock.service";
 
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+export const environment = {
+  production: false,
+  providers: [
+    { provide: AbstractResourceBoardService, useClass: MockResourceBoardService },
+    { provide: AbstractResourceService, useClass: MockResourceService },
+    { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService },
+    { provide: AbstractAuthenticationService, useClass: MockAuthenticationService },
+  ],
+};

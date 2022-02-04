@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Resource } from '../shared/resource.interface';
-import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { AbstractAuthenticationService } from '../../../authentication/authentication.abstract.service';
 
 @Component({
   selector: 'app-resource-table',
@@ -50,7 +50,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
   public destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authenticationService: AbstractAuthenticationService,
   ) { }
 
   ngAfterViewInit(): void {

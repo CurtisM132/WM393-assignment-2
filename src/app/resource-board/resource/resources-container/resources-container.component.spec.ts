@@ -10,7 +10,7 @@ import { MaterialModule } from '../../../material.module';
 import { ActivatedRoute, ActivatedRouteStub } from '../../../../testing/activated-route-stub';
 import { MockKeycloakService } from '../../../authentication/mock-keycloak-service';
 import { ResourceBoardModule } from '../../resource-board.module';
-import { AbstractResourceService } from '../shared/resource.abstract-service';
+import { AbstractResourceService } from '../shared/resource.abstract.service';
 import { MockResourceService } from '../shared/resource.mock.service';
 
 import { ResourcesContainerComponent } from './resources-container.component';

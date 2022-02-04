@@ -6,14 +6,16 @@ import { Router } from '@angular/router';
 
 import { KeycloakService } from 'keycloak-angular';
 
-import { AuthenticationService } from '../../authentication/authentication.service';
-import { MockKeycloakService } from '../../authentication/mock-keycloak-service';
 import { MaterialModule } from '../../material.module';
+import { TeachingModulesModule } from '../teaching-modules.module';
+import { AbstractAuthenticationService } from '../../authentication/authentication.abstract.service';
+import { MockAuthenticationService } from '../../authentication/authentication.mock.service';
+import { MockKeycloakService } from '../../authentication/mock-keycloak-service';
 import { AbstractTeachingModulesService } from '../shared/teaching-modules.abstract.service';
 import { MockTeachingModulesService } from '../shared/teaching-modules.mock.service';
-import { TeachingModulesModule } from '../teaching-modules.module';
 
 import { TeachingModulesPageComponent } from './teaching-modules-page.component';
+
 
 describe('TeachingModulesPageComponent', () => {
   let component: TeachingModulesPageComponent;
@@ -34,7 +36,7 @@ describe('TeachingModulesPageComponent', () => {
       providers: [
         { provide: Router, useValue: routerSpy },
         { provide: KeycloakService, useClass: MockKeycloakService },
-        { provide: AuthenticationService, useClass: AuthenticationService },
+        { provide: AbstractAuthenticationService, useClass: MockAuthenticationService },
         { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService },
       ],
     })

@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthenticationService } from 'src/app/authentication/authentication.service';
+
+import { AbstractAuthenticationService } from '../../../authentication/authentication.abstract.service';
 import { ResourceBoardSummary } from '../shared/resource-board.interface';
+
 
 @Component({
   selector: 'app-resource-board-display-list',
@@ -21,7 +23,7 @@ export class ResourceBoardDisplayListComponent implements OnInit {
   public destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authenticationService: AbstractAuthenticationService,
   ) { }
 
   ngOnInit() {

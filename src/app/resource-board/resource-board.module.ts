@@ -4,16 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 
+import { environment } from 'src/environments/environment';
+
 import { FileUploadModule } from '../file-upload/file-upload.module';
 
 import { ResourceBoardPageComponent } from './page/resource-board-page.component';
 import { ResourceBoardDisplayListComponent } from './board/display-list/resource-board-display-list.component';
 import { CreateResourceBoardInputComponent } from './board/create-resource-board-input/create-resource-board-input.component';
-import { AbstractResourceBoardService } from './board/shared/resource-board.abstract-service';
-import { MockResourceBoardService } from './board/shared/resource-board.mock.service';
 import { ResourceTableComponent } from './resource/resource-table/resource-table.component';
-import { AbstractResourceService } from './resource/shared/resource.abstract-service';
-import { MockResourceService } from './resource/shared/resource.mock.service';
 import { ResourcesContainerComponent } from './resource/resources-container/resources-container.component';
 import { DisplayResourceComponent } from './resource/display-resource/display-resource.component';
 
@@ -38,8 +36,7 @@ import { DisplayResourceComponent } from './resource/display-resource/display-re
     ResourceBoardPageComponent,
   ],
   providers: [
-    { provide: AbstractResourceBoardService, useClass: MockResourceBoardService },
-    { provide: AbstractResourceService, useClass: MockResourceService },
+    ...environment.providers,
   ]
 })
 export class ResourceBoardModule { }

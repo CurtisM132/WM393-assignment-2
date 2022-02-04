@@ -6,7 +6,8 @@ import { KeycloakService } from 'keycloak-angular';
 import { MaterialModule } from '../../../material.module';
 import { MockKeycloakService } from '../../../authentication/mock-keycloak-service';
 import { ResourceBoardModule } from '../../resource-board.module';
-import { AuthenticationService } from '../../../authentication/authentication.service';
+import { AbstractAuthenticationService } from '../../../authentication/authentication.abstract.service';
+import { MockAuthenticationService } from '../../../authentication/authentication.mock.service';
 
 import { ResourceBoardDisplayListComponent } from './resource-board-display-list.component';
 
@@ -25,7 +26,7 @@ describe('ResourceBoardDisplayListComponent', () => {
       ],
       providers: [
         { provide: KeycloakService, useClass: MockKeycloakService },
-        { provide: AuthenticationService, useClass: AuthenticationService },
+        { provide: AbstractAuthenticationService, useClass: MockAuthenticationService },
       ],
     })
     .compileComponents();

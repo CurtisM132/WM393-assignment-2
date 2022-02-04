@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { BehaviorSubject } from 'rxjs';
+import { AbstractAuthenticationService } from './authentication.abstract.service';
 import { getLoggedInState, getUserId, getUsername, getUserRoles } from './keycloak-utils';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
-
-  private readonly TUTOR_ROLE = "wmgtss-tutor";
-  private readonly STUDENT_ROLE = "wmgtss-student";
-
-  public loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public userId$: BehaviorSubject<string> = new BehaviorSubject<string>("");
-  public username$: BehaviorSubject<string> = new BehaviorSubject<string>("");
-
+export class AuthenticationService extends AbstractAuthenticationService {
   private roles: string[] = [];
-  public haveRoles$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private keycloakService: KeycloakService) {
+    super()
+
+    this.loggedIn$ = new BehaviorSubject<boolean>(false);
+    this.userId$ = new BehaviorSubject<string>("");
+    this.username$ = new BehaviorSubject<string>("");
+    this.haveRoles$ = new BehaviorSubject<boolean>(false);
+
     const i = setInterval(() => {
       getLoggedInState(this.keycloakService)
         .then(loggedIn => {
@@ -59,6 +58,7 @@ export class AuthenticationService {
 
   public logout(): void {
     this.keycloakService.logout();
+    this.loggedIn$.next(false);
   }
 
   public isTutor(): boolean {

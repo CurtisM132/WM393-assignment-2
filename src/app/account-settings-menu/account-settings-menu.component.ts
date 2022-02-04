@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AbstractAuthenticationService } from '../authentication/authentication.abstract.service';
+
 
 @Component({
   selector: 'app-account-settings-menu',
@@ -14,7 +15,7 @@ export class AccountSettingsMenuComponent implements OnInit, OnDestroy {
 
   public destroyed$: Subject<void> = new Subject<void>();
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AbstractAuthenticationService) { }
 
   ngOnInit(): void {
     this.authenticationService.loggedIn$

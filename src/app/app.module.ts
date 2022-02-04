@@ -1,13 +1,13 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { KeycloakAngularModule } from 'keycloak-angular';
+
+import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-
-import { InitialiseKeycloak } from './authentication/keycloak-utils';
 
 import { ModuleFunctionsModule } from './teaching-module-functions/module-functions.module';
 import { TeachingModulesModule } from './teaching-modules/teaching-modules.module';
@@ -34,12 +34,7 @@ import { AccountSettingsMenuComponent } from './account-settings-menu/account-se
     ResourceBoardModule,
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: InitialiseKeycloak,
-      multi: true,
-      deps: [KeycloakService]
-    }
+    ...environment.providers,
   ],
   bootstrap: [AppComponent]
 })

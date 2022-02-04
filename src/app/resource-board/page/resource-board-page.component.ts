@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthenticationService } from 'src/app/authentication/authentication.service';
 
+import { AbstractAuthenticationService } from '../../authentication/authentication.abstract.service';
 import { AbstractResourceBoardService } from '../board/shared/resource-board.abstract-service';
 import { ResourceBoardSummary } from '../board/shared/resource-board.interface';
+
 
 @Component({
   selector: 'app-resource-board-page',
@@ -21,7 +22,7 @@ export class ResourceBoardPageComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AbstractAuthenticationService,
     private resourceBoardService: AbstractResourceBoardService,
   ) { }
 

@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { saveAs } from 'file-saver';
 
 import { Resource } from './resource.interface';
-import { AbstractResourceService } from './resource.abstract-service';
+import { AbstractResourceService } from './resource.abstract.service';
 import { mockBoardResources } from './resource.mock.data';
 import { BoardResources } from './board.resources.interface';
 

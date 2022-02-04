@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
 import { AbstractTeachingModulesService } from '../../teaching-modules/shared/teaching-modules.abstract.service';
-import { AuthenticationService } from '../../authentication/authentication.service';
 import { TEACHING_MODULE_FUNCTIONS, teachingModuleFunctionToMaterialIcon } from '../shared/teaching-module-functions.enums';
+import { AbstractAuthenticationService } from '../../authentication/authentication.abstract.service';
 
 
 /**
@@ -30,7 +30,7 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AbstractAuthenticationService,
     private teachingModulesService: AbstractTeachingModulesService,
   ) { }
 

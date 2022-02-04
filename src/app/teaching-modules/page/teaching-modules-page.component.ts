@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { AuthenticationService } from 'src/app/authentication/authentication.service';
-import { AbstractTeachingModulesService } from '../shared/teaching-modules.abstract.service';
 import { TeachingModule } from '../shared/teaching-modules.interface';
+import { AbstractAuthenticationService } from '../../authentication/authentication.abstract.service';
+import { AbstractTeachingModulesService } from '../shared/teaching-modules.abstract.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class TeachingModulesPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AbstractAuthenticationService,
     private teachingModulesService: AbstractTeachingModulesService,
   ) { }
 
