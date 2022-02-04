@@ -26,14 +26,14 @@ export const mockResources: Resource[] = [
 export const mockBoardResources: BoardResources[] = [
     {
         id: "1",
-        resources: mockResources
+        resources: mockResources,
     },
     {
         id: "2",
-        resources: [mockResources[0]]
+        resources: [],
     },
     {
         id: "3",
-        resources: [mockResources[1]]
+        resources: [],
     }
 ]

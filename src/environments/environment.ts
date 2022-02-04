@@ -19,4 +19,5 @@ export const environment = {
     { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService },
     { provide: AbstractAuthenticationService, useClass: MockAuthenticationService },
   ],
+  keycloak: [],
 };

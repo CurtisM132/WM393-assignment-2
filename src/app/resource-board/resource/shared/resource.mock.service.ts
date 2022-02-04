@@ -82,7 +82,7 @@ export class MockResourceService implements AbstractResourceService {
       if (resourceId && resourceId !== "") {
         const resource = this.mockBoardResources[boardIndex].resources.find(x => x.id === resourceId)
         if (resource) {
-          saveAs(resource.filePath, `${resource.name}.${resource.fileFormat}`);
+          saveAs(resource.filePath as string, `${resource.name}.${resource.fileFormat}`);
   
           return of(true);
         }

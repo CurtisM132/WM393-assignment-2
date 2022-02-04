@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+
+import { AbstractAuthenticationService } from '../../../authentication/authentication.abstract.service';
 import { FileHandle } from '../../../file-upload/drag-and-drop-file.directive';
 import { ACCEPTED_FILE_EXTENSIONS, fileExtensionToFileType, FILE_TYPE } from '../shared/resource-file.enums';
-
 import { AbstractResourceService } from '../shared/resource.abstract.service';
 import { Resource } from '../shared/resource.interface';
 
@@ -12,19 +13,23 @@ import { Resource } from '../shared/resource.interface';
   templateUrl: './resources-container.component.html',
   styleUrls: ['./resources-container.component.css']
 })
-export class ResourcesContainerComponent implements OnInit {
+export class ResourcesContainerComponent implements OnInit, OnDestroy {
+
+  public isTutor: boolean = false;
 
   public resourceBoardId: string;
 
-  // Needed to control the file upload component behaviour (i.e., if it displays the upload button or not)
+  // Needed locally to control the file upload component behaviour (i.e., if it displays the upload button or not)
   public resources: Resource[] = [];
-
   public resources$: BehaviorSubject<Resource[]> = new BehaviorSubject<Resource[]>([]);
+
+  public destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private resourceService: AbstractResourceService
+    private authenticationService: AbstractAuthenticationService,
+    private resourceService: AbstractResourceService,
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +39,21 @@ export class ResourcesContainerComponent implements OnInit {
       .subscribe((params: any) => {
         this.resourceBoardId = params.get('boardId');
         this.getResources();
-      })
+      });
+
+    this.authenticationService.haveRoles$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(haveRoles => {
+        if (haveRoles) {
+          this.isTutor = this.authenticationService.isTutor();
+        } else {
+          this.isTutor = false;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   public handleFilesDropped(files: FileHandle[]): void {
@@ -103,7 +122,7 @@ export class ResourcesContainerComponent implements OnInit {
         uploadDate: new Date(),
         fileType: fileExtensionToFileType(fileExt as ACCEPTED_FILE_EXTENSIONS),
         fileFormat: fileExt as ACCEPTED_FILE_EXTENSIONS,
-        filePath: file.plainUrl,
+        filePath: file.url,
       };
 
       this.resourceService.uploadResource(this.resourceBoardId, resource)

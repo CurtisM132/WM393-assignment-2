@@ -1,4 +1,4 @@
-<div class="home-cards-container">
+<div class="function-cards-container">
     <mat-card *ngFor="let function of moduleFunctions" class="home-card" (click)="handleNavigation(function)">
         <mat-card-content>
             <button mat-icon-button *ngIf="isTutor" matTooltip="Delete" class="delete-button" (click)="$event.stopPropagation();handleDeleteFunction(function)">

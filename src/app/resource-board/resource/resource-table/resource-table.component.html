@@ -20,7 +20,7 @@
 
       <div *ngIf="isTutor">
         <mat-form-field class="comment-form-field" appearance="outline" (click)="$event.stopPropagation()">
-          <input matInput type="text" autocomplete="off" [(ngModel)]="row.comment">
+          <input matInput id="resource-comment-input" type="text" autocomplete="off" [(ngModel)]="row.comment">
         </mat-form-field>
       </div>
     </td>

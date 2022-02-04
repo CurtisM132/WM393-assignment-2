@@ -3,10 +3,10 @@
 <div *ngIf="displayUploadButton" class="center-container">
     <img [src]="'assets/drag-files-here.png'">
     <h2>OR</h2>
-    <button mat-raised-button color="primary" (click)="handleUploadClick()">
+    <button mat-raised-button id="upload-file" color="primary" (click)="handleUploadClick()">
         Upload
     </button>
-    <input #FileSelectInputDialog type="file" multiple style="visibility: hidden;"
+    <input #FileSelectInputDialog id="file-upload" type="file" multiple style="visibility: hidden;"
         (change)="handleFileInput($event)">
 </div>
 <div *ngIf="displayUploadButton" appDragAndDropFile class="dropzone" (filesDropped)="handleFilesDropped($event)"></div>

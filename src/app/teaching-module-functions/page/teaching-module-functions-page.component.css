@@ -9,7 +9,7 @@ mat-card-content {
     justify-content: center;
 }
 
-.home-cards-container {
+.function-cards-container {
     display: flex;
     flex-wrap: wrap;
 }

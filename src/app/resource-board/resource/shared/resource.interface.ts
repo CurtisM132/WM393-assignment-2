@@ -1,3 +1,4 @@
+import { SafeUrl } from '@angular/platform-browser';
 import { ACCEPTED_FILE_EXTENSIONS, FILE_TYPE } from './resource-file.enums';
 
 export interface Resource {
@@ -6,6 +7,6 @@ export interface Resource {
     uploadDate: Date
     fileType: FILE_TYPE
     fileFormat: ACCEPTED_FILE_EXTENSIONS
-    filePath: string
+    filePath: string | SafeUrl
     comment?: string
 };

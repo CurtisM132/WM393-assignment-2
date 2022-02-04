@@ -35,13 +35,8 @@ import { InitialiseKeycloak } from './authentication/keycloak-utils';
     ResourceBoardModule,
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: InitialiseKeycloak,
-      multi: true,
-      deps: [KeycloakService]
-    },
     ...environment.providers,
+    ...environment.keycloak,
   ],
   bootstrap: [AppComponent]
 })

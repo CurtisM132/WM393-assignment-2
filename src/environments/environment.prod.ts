@@ -1,5 +1,8 @@
+import { APP_INITIALIZER } from "@angular/core";
+import { KeycloakService } from "keycloak-angular";
 import { AbstractAuthenticationService } from "src/app/authentication/authentication.abstract.service";
 import { AuthenticationService } from "src/app/authentication/authentication.service";
+import { InitialiseKeycloak } from "src/app/authentication/keycloak-utils";
 import { AbstractResourceBoardService } from "src/app/resource-board/board/shared/resource-board.abstract-service";
 import { MockResourceBoardService } from "src/app/resource-board/board/shared/resource-board.mock.service";
 import { AbstractResourceService } from "src/app/resource-board/resource/shared/resource.abstract.service";
@@ -15,4 +18,12 @@ export const environment = {
     { provide: AbstractTeachingModulesService, useClass: MockTeachingModulesService },
     { provide: AbstractAuthenticationService, useClass: AuthenticationService },
   ],
+  keycloak: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: InitialiseKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
+  ]
 };
