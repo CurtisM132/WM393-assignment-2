@@ -1,9 +1,6 @@
 <div id="top"></div>
 
-<!-- I am a readme -->
-
-<!-- PROJECT SHIELDS
--->
+<!-- PROJECT SHIELDS -->
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
@@ -12,10 +9,10 @@
 <br />
 <div align="center">
 
-<h3 align="center">WMGTSS</h3>
+<h3 align="center">WMGTSS Prototype (Resource Board Implementation)</h3>
 
   <p align="center">
-    TBC
+    A functional prototype of the WMG Teaching Support System with particular care given to the resource board module function
     <br />
     <br />
     <br />
@@ -26,55 +23,86 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+![Module Functions Page][module-functions-page-screenshot]
 
-![Product Name Screen Shot][product-screenshot]
+![Resource Page][resource-board-screenshot]
+
+![Resource Display][resource-display-screenshot]
 
 
 
 ### Built With
-
+* [TypeScript](https://www.typescriptlang.org/)
 * [Angular](https://angular.io/)
+* [Material UI](https://material.angular.io/)
+* [Keycloak](https://www.keycloak.org/)
+* [Docker](https://www.docker.com/)
+* [RxJS](https://rxjs.dev/)
+* [Karma](https://karma-runner.github.io/latest/index.html)
+* [Jasmine](https://jasmine.github.io/)
+* [Cypress](https://www.cypress.io/)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Prerequisites
 
+### Prerequisites
+* [Docker](https://www.docker.com/)
+* [Web Browser (Chrome Recommended)](https://www.google.com/intl/en_uk/chrome/)
+
+
+### Prerequisites (for development)
+* [Docker](https://www.docker.com/)
 * [Node.js](https://nodejs.org/en/)
+* [Angular](https://angular.io/)
+* [Web Browser (Chrome Recommended)](https://www.google.com/intl/en_uk/chrome/)
+
 
 ### Installation
-
 1. Download or clone repository
-2. Install dependencies using `npm install`
+2. Run `docker-compose up` in the repository
 
 
+### Usage
+1. Navigate to [localhost:8080](localhost:8080)
 
-<!-- USAGE EXAMPLES -->
-## Usage
 
-#### Development server
+### Installation (for development)
+1. Download or clone repository
+2. Run `npm install` in the repository
+3. Run up the app using the development server command listed below
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+### Usage (for development)
+
+
+#### Development server (production)
+
+Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+#### Development server (dev data)
+
+Run `npm run start:dev` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 #### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 #### Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 #### Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
+Run `npm run e2e` to execute the end-to-end tests via Cypress.
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/curtismartin3
-[product-screenshot]: images/screenshot.png
+[module-functions-page-screenshot]: images/website/module-functions-page.png
+[resource-board-screenshot]: images/website/resource-board.png
+[resource-display-screenshot]: images/website/resource-display.png

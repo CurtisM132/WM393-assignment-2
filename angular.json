@@ -131,19 +131,15 @@
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "WMGTSS:serve",
+            "devServerTarget": "WMGTSS:serve:production",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
               "browserTarget": "WMGTSS:serve:production"
-            },
-            "development": {
-              "browserTarget": "WMGTSS:serve:development"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         }
       }
     }
