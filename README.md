@@ -29,7 +29,7 @@
 
 ![Resource Display][resource-display-screenshot]
 
-
+<br />
 
 ### Built With
 * [TypeScript](https://www.typescriptlang.org/)
@@ -42,7 +42,7 @@
 * [Jasmine](https://jasmine.github.io/)
 * [Cypress](https://www.cypress.io/)
 
-
+<br />
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -95,6 +95,21 @@ Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.gi
 #### Running end-to-end tests
 Run `npm run e2e` to execute the end-to-end tests via Cypress.
 
+
+<br />
+
+### Authentication Accounts (keycloak logins)
+##### Tutor #1
+Username: **tutor1**<br />
+Password: **password**
+
+##### Student #1
+Username: **student1**<br />
+Password: **password**
+
+##### Student #2
+Username: **student2**<br />
+Password: **password**
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
