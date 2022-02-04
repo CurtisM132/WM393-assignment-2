@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { KeycloakAngularModule } from 'keycloak-angular';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +15,7 @@ import { ResourceBoardModule } from './resource-board/resource-board.module';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AccountSettingsMenuComponent } from './account-settings-menu/account-settings-menu.component';
+import { InitialiseKeycloak } from './authentication/keycloak-utils';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,12 @@ import { AccountSettingsMenuComponent } from './account-settings-menu/account-se
     ResourceBoardModule,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: InitialiseKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
     ...environment.providers,
   ],
   bootstrap: [AppComponent]
