@@ -26,7 +26,7 @@ export class TeachingModulesPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Subscribe to the users account roles then get if they're a tutor or not
+    // Get the user account id so we can get the appropriate teaching modules for them
     this.authenticationService.userId$
       .pipe(takeUntil(this.destroyed$))
       .subscribe((userId: string) => {

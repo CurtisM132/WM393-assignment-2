@@ -15,6 +15,7 @@ export class TeachingModuleFunctionsSidenavComponent {
 
   public destroyed$: Subject<void> = new Subject<void>();
 
+  // Needed so the HTML template can access this function
   public teachingModuleFunctionToMaterialIcon = teachingModuleFunctionToMaterialIcon;
 
   constructor(
@@ -29,6 +30,7 @@ export class TeachingModuleFunctionsSidenavComponent {
         const moduleId = params.get('id');
 
         if (moduleId) {
+          // Get the teaching module functions
           this.teachingModulesService.getTeachingModule(moduleId)
             .subscribe((teachingModule) => {
               if (teachingModule) {
@@ -44,7 +46,7 @@ export class TeachingModuleFunctionsSidenavComponent {
   }
 
   public handleNavigation(path: TEACHING_MODULE_FUNCTIONS): void {
-    // Only route to resource board for this POC
+    // Only route to resource board for this prototype
     if (path === TEACHING_MODULE_FUNCTIONS.RESOURCE) {
       this.router.navigate(["/resource"], { relativeTo: this.route });
     }

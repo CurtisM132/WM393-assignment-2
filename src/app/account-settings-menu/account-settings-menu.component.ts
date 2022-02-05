@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+
 import { AbstractAuthenticationService } from '../authentication/authentication.abstract.service';
 
 
@@ -18,10 +19,12 @@ export class AccountSettingsMenuComponent implements OnInit, OnDestroy {
   constructor(private authenticationService: AbstractAuthenticationService) { }
 
   ngOnInit(): void {
+    // Get the logged in state
     this.authenticationService.loggedIn$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(loggedIn => this.loggedIn = loggedIn);
 
+    // Get the users username for display purposes
     this.authenticationService.username$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(username => this.username = username);

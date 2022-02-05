@@ -1,5 +1,7 @@
 import { KeycloakService } from "keycloak-angular";
 
+export const KEYCLOAK_POLL_RATE = 2000;
+
 export function InitialiseKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
@@ -9,7 +11,7 @@ export function InitialiseKeycloak(keycloak: KeycloakService) {
         clientId: 'wmgtss'
       },
       initOptions: {
-        onLoad: 'login-required'
+        onLoad: 'login-required' // The user must login to Keycloak before they can use the system
       },
       bearerExcludedUrls: ['/assets'],
     });

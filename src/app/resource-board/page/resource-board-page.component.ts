@@ -35,7 +35,7 @@ export class ResourceBoardPageComponent implements OnInit {
         this.moduleId = params.get('id');
       });
 
-    // Subscribe to the users account roles then get if they're a tutor or not
+    // Get whether or not the user is a tutor
     this.authenticationService.haveRoles$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(haveRoles => {

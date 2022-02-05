@@ -65,6 +65,7 @@ export class MockResourceService implements AbstractResourceService {
     const boardIndex = this.mockBoardResources.findIndex(x => x.id === boardId)
     if (boardIndex > -1) {
       if (resourceId && resourceId !== "") {
+        // Remove the resource from the resources array that matches the id
         this.mockBoardResources[boardIndex].resources =
           this.mockBoardResources[boardIndex].resources.filter((resourceBoard: Resource) => resourceBoard.id !== resourceId);
 

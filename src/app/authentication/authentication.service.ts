@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { BehaviorSubject } from 'rxjs';
+
 import { AbstractAuthenticationService } from './authentication.abstract.service';
-import { getLoggedInState, getUserId, getUsername, getUserRoles } from './keycloak-utils';
+import { getLoggedInState, getUserId, getUsername, getUserRoles, KEYCLOAK_POLL_RATE } from './keycloak-utils';
 
 
 @Injectable({
@@ -19,6 +20,7 @@ export class AuthenticationService extends AbstractAuthenticationService {
     this.username$ = new BehaviorSubject<string>("");
     this.haveRoles$ = new BehaviorSubject<boolean>(false);
 
+    // Poll Keycloak with an interval until it's ready
     const i = setInterval(() => {
       getLoggedInState(this.keycloakService)
         .then(loggedIn => {
@@ -53,7 +55,7 @@ export class AuthenticationService extends AbstractAuthenticationService {
             clearInterval(i);
           }
         })
-    }, 1000)
+    }, KEYCLOAK_POLL_RATE)
   }
 
   public logout(): void {

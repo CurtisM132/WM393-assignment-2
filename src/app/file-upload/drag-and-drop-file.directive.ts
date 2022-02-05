@@ -18,6 +18,7 @@ export class DragAndDropFileDirective {
   @HostListener("dragover", ["$event"]) public onDragOver(evt: DragEvent): void {
     evt.preventDefault();
     evt.stopPropagation();
+    // Darken the background when a file is dragged over it
     this.opacity = "0.35";
   }
 
@@ -32,7 +33,7 @@ export class DragAndDropFileDirective {
     evt.stopPropagation();
     this.opacity = '0';
 
-    // Format dropped files to a useable datatype
+    // Format dropped files to a useable datatype the emit
     if (evt.dataTransfer) {
       let files: FileHandle[] = [];
       for (let i = 0; i < evt.dataTransfer.files.length; i++) {

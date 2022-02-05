@@ -60,6 +60,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
   }
 
   ngOnInit(): void {
+    // Get whether or not the user is a tutor
     this.authenticationService.haveRoles$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(haveRoles => {

@@ -27,6 +27,7 @@ export class ResourceBoardDisplayListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Get whether or not the user is a tutor
     this.authenticationService.haveRoles$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(haveRoles => {
@@ -38,8 +39,10 @@ export class ResourceBoardDisplayListComponent implements OnInit {
       });
 
     // Select the first resource board automatically on page load
-    this.selectedOptions[0] = this.resourceBoards[0];
-    this.onSelectionChange();
+    if (this.resourceBoards.length > 0) {
+      this.selectedOptions[0] = this.resourceBoards[0];
+      this.onSelectionChange();
+    }
   }
 
   ngOnDestroy(): void {
@@ -54,7 +57,7 @@ export class ResourceBoardDisplayListComponent implements OnInit {
     event.stopPropagation();
 
     this.deleteResourceBoardEvent.emit(id);
-    
+
     // If the user deletes the resource board they are currently viewing 
     // then select the new first resource board in the display list
     // TODO: This works but doesn't trigger a selection/ripple in the Mat Selection List

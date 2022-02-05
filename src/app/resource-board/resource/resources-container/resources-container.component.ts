@@ -41,6 +41,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
         this.getResources();
       });
 
+    // Get whether or not the user is a tutor
     this.authenticationService.haveRoles$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(haveRoles => {
@@ -63,6 +64,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
   }
 
   public handleResourceClicked(resource: Resource): void {
+    // Display the resource if applicable
     if (resource.fileType === FILE_TYPE.IMAGE || resource.fileType === FILE_TYPE.VIDEO) {
       // This route corresponds with a resource display component (see routing module)
       this.router.navigate([resource.id], { relativeTo: this.route });

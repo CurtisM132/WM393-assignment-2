@@ -32,7 +32,7 @@ export class FileUploadComponent {
   }
 
   public handleFileInput(event: any): void {
-    // Format dropped files to a useable datatype
+    // Format dropped files to a useable datatype then emit
     if (event.target.files) {
       let files: FileHandle[] = [];
       for (let i = 0; i < event.target.files.length; i++) {
