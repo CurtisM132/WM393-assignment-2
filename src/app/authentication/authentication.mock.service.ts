@@ -1,5 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 import { AbstractAuthenticationService } from './authentication.abstract.service';
 
 
@@ -11,7 +12,8 @@ export class MockAuthenticationService extends AbstractAuthenticationService {
     super();
 
     this.loggedIn$ = new BehaviorSubject<boolean>(true);
-    this.userId$ = new BehaviorSubject<string>("ff6de3bd-27b5-408f-92b2-f38f2e194324");
+    // Default login as a tutor
+    this.userId$ = new BehaviorSubject<string>("596595e5-b25a-4cb2-9347-499d2b3c05f6");
     this.username$ = new BehaviorSubject<string>("tutor1");
     this.haveRoles$ = new BehaviorSubject<boolean>(true);
   }

@@ -68,7 +68,7 @@
 
 
 ### Usage
-1. Navigate to [localhost:8080](localhost:8080)
+1. Navigate to [localhost](localhost)
 
 <br />
 

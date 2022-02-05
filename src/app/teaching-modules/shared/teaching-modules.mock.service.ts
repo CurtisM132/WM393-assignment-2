@@ -36,15 +36,15 @@ export class MockTeachingModulesService implements AbstractTeachingModulesServic
 
   private mockUserTeachingModulesMappings: UserTeachingModulesMapping[] = [
     {
-      userId: "3652fdd0-005d-4e2f-ad7e-ec6a0801b377", // student1
+      userId: "9cd67255-69f7-4690-822e-fab4bcb4d1a9", // student1
       modules: ["1", "2"],
     },
     {
-      userId: "d9852de3-f546-4848-9e43-fdc6b5898f94", // student2
+      userId: "c922b40e-2e23-42fc-8924-da97f1681c49", // student2
       modules: ["1"],
     },
     {
-      userId: "ff6de3bd-27b5-408f-92b2-f38f2e194324", // tutor1
+      userId: "596595e5-b25a-4cb2-9347-499d2b3c05f6", // tutor1
       modules: ["1", "2"],
     }
   ];
