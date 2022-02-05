@@ -99,15 +99,15 @@ Run `npm run e2e` to execute the end-to-end tests via Cypress.
 <br />
 
 ### Authentication Accounts (keycloak logins)
-##### Tutor #1
+#### Tutor #1
 Username: **tutor1**<br />
 Password: **password**
 
-##### Student #1
+#### Student #1
 Username: **student1**<br />
 Password: **password**
 
-##### Student #2
+#### Student #2
 Username: **student2**<br />
 Password: **password**
 

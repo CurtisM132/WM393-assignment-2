@@ -10,11 +10,11 @@
 
     <div class="resource-file-container">
         <!-- Display an image if the resource is an image type -->
-        <img *ngIf="resource.fileType === FILE_TYPE_ENUM.IMAGE" [src]="resource.filePath" id="resource-image-display" class="resource-file-display">
+        <img *ngIf="resource.fileType === FILE_TYPE_ENUM.IMAGE" [src]="resourceURI" id="resource-image-display" class="resource-file-display">
 
         <!-- Display a video if the resource is an video type -->
         <video *ngIf="resource.fileType === FILE_TYPE_ENUM.VIDEO" id="resource-video-display" class="resource-file-display" controls autoplay>
-            <source [src]="resource.filePath">
+            <source [src]="resourceURI">
         </video>
     </div>
 </div>

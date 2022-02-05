@@ -19,6 +19,7 @@ describe('Upload Resource', () => {
     it('Should have an image resource', () => {
         // File drag and drop zone shouldn't exist as a student
         cy.get('.dropzone').should('not.exist');
+        // Material table adds padding to text hence the spaces either side of the test text
         cy.get('tbody > :nth-child(1) > .cdk-column-name').should('have.text', ' 3D Cartography Example ');
         cy.get('tbody > :nth-child(1) > .cdk-column-type').should('have.text', ' IMAGE ');
         cy.get('tbody > :nth-child(1) > .cdk-column-fileFormat').should('have.text', ' JPG ');

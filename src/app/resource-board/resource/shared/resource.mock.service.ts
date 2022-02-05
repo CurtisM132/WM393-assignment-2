@@ -80,10 +80,12 @@ export class MockResourceService implements AbstractResourceService {
     const boardIndex = this.mockBoardResources.findIndex(x => x.id === boardId)
     if (boardIndex > -1) {
       if (resourceId && resourceId !== "") {
+        // Get the resource
         const resource = this.mockBoardResources[boardIndex].resources.find(x => x.id === resourceId)
         if (resource) {
-          saveAs(resource.filePath as string, `${resource.name}.${resource.fileFormat}`);
-  
+          // Fire the download using a third party file saver library
+          saveAs(resource.filePath, `${resource.name}.${resource.fileFormat}`);
+
           return of(true);
         }
       }

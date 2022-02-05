@@ -1,6 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FileHandle } from './drag-and-drop-file.directive';
+
+
+export interface FileHandle {
+  file: File,
+  plainURI: string
+}
 
 @Component({
   selector: 'app-file-upload',
@@ -15,7 +19,7 @@ export class FileUploadComponent {
 
   @ViewChild('FileSelectInputDialog') FileSelectInputDialog: ElementRef;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor() { }
 
   public handleFilesDropped(files: FileHandle[]): void {
     this.filesDropped.emit(files)
@@ -34,9 +38,8 @@ export class FileUploadComponent {
       for (let i = 0; i < event.target.files.length; i++) {
         const file = event.target.files[i];
         // Get a file path for the uploaded file so it can be re-downloaded
-        const plainUrl = window.URL.createObjectURL(file)
-        const url = this.sanitizer.bypassSecurityTrustUrl(plainUrl);
-        files.push({ file, url, plainUrl });
+        const plainURI = window.URL.createObjectURL(file)
+        files.push({ file, plainURI });
       }
       if (files.length > 0) {
         this.filesDropped.emit(files);

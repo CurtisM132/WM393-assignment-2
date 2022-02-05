@@ -1,11 +1,7 @@
 import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
-export interface FileHandle {
-  file: File,
-  url: SafeUrl
-  plainUrl: string
-}
+import { FileHandle } from './file-upload.component';
+
 
 @Directive({
   selector: '[appDragAndDropFile]'
@@ -17,7 +13,7 @@ export class DragAndDropFileDirective {
   @HostBinding("style.opacity") private opacity = "0";
   @HostBinding("style.pointerEvents") private pointerEvents = "all";
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor() { }
 
   @HostListener("dragover", ["$event"]) public onDragOver(evt: DragEvent): void {
     evt.preventDefault();
@@ -42,9 +38,8 @@ export class DragAndDropFileDirective {
       for (let i = 0; i < evt.dataTransfer.files.length; i++) {
         const file = evt.dataTransfer.files[i];
         // Get a file path for the uploaded file so it can be re-downloaded
-        const plainUrl = window.URL.createObjectURL(file)
-        const url = this.sanitizer.bypassSecurityTrustUrl(plainUrl);
-        files.push({ file, url, plainUrl });
+        const plainURI = window.URL.createObjectURL(file)
+        files.push({ file, plainURI });
       }
       if (files.length > 0) {
         this.filesDropped.emit(files);

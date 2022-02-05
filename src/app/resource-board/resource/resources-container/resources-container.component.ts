@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 import { AbstractAuthenticationService } from '../../../authentication/authentication.abstract.service';
-import { FileHandle } from '../../../file-upload/drag-and-drop-file.directive';
+import { FileHandle } from '../../../file-upload/file-upload.component';
 import { ACCEPTED_FILE_EXTENSIONS, fileExtensionToFileType, FILE_TYPE } from '../shared/resource-file.enums';
 import { AbstractResourceService } from '../shared/resource.abstract.service';
 import { Resource } from '../shared/resource.interface';
@@ -122,7 +122,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
         uploadDate: new Date(),
         fileType: fileExtensionToFileType(fileExt as ACCEPTED_FILE_EXTENSIONS),
         fileFormat: fileExt as ACCEPTED_FILE_EXTENSIONS,
-        filePath: file.url,
+        filePath: file.plainURI,
       };
 
       this.resourceService.uploadResource(this.resourceBoardId, resource)

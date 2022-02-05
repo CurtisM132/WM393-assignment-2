@@ -20,6 +20,14 @@ export const mockResources: Resource[] = [
         fileType: FILE_TYPE.VIDEO,
         fileFormat: ACCEPTED_FILE_EXTENSIONS.MP4,
         filePath: './assets/demo-resources/arcgis_setup.mp4',
+    },
+    {
+        id: '3',
+        name: 'Markdown Example',
+        uploadDate: new Date("2022-02-03"),
+        fileType: FILE_TYPE.TEXT,
+        fileFormat: ACCEPTED_FILE_EXTENSIONS.MD,
+        filePath: './assets/demo-resources/markdown file.md',
     }
 ];
 

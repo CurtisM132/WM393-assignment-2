@@ -7,6 +7,6 @@ export interface Resource {
     uploadDate: Date
     fileType: FILE_TYPE
     fileFormat: ACCEPTED_FILE_EXTENSIONS
-    filePath: string | SafeUrl
+    filePath: string
     comment?: string
 };
