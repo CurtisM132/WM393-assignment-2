@@ -15,6 +15,8 @@ import { ResourceBoardSummary } from '../board/shared/resource-board.interface';
 export class ResourceBoardPageComponent implements OnInit {
 
   public isTutor: boolean = false;
+
+  private moduleId: string;
   public resourceBoards: ResourceBoardSummary[] = [];
 
   public destroyed$: Subject<void> = new Subject<void>();
@@ -27,6 +29,12 @@ export class ResourceBoardPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Get module id from route
+    this.route.paramMap
+      .subscribe((params: any) => {
+        this.moduleId = params.get('id');
+      });
+
     // Subscribe to the users account roles then get if they're a tutor or not
     this.authenticationService.haveRoles$
       .pipe(takeUntil(this.destroyed$))
@@ -47,18 +55,20 @@ export class ResourceBoardPageComponent implements OnInit {
 
   private fetchResourceBoards(): void {
     // Get existing resource boards
-    this.resourceBoardService.getResourceBoards()
-      .subscribe((boards: ResourceBoardSummary[]) => {
-        this.resourceBoards = boards;
+    this.resourceBoardService.getResourceBoards(this.moduleId)
+      .subscribe((boards) => {
+        if (boards) {
+          this.resourceBoards = boards;
+        }
       });
   }
 
   public createResourceBoard(name: string): void {
-    this.resourceBoardService.createResourceBoard(name)
-      .subscribe((id: string) => {
-        if (id !== "") {
+    this.resourceBoardService.createResourceBoard(this.moduleId, name)
+      .subscribe((id) => {
+        if (id !== undefined && id !== "") {
           console.log("Successfully created resource board: ", name);
-          this.fetchResourceBoards()
+          this.fetchResourceBoards();
         } else {
           console.log("Failed to create resource board: ", name);
         }
@@ -66,11 +76,11 @@ export class ResourceBoardPageComponent implements OnInit {
   }
 
   public deleteResourceBoard(id: string): void {
-    this.resourceBoardService.deleteResourceBoard(id)
+    this.resourceBoardService.deleteResourceBoard(this.moduleId, id)
       .subscribe((success: boolean) => {
         if (success) {
           console.log("Successfully deleted resource board: ", id);
-          this.fetchResourceBoards()
+          this.fetchResourceBoards();
         } else {
           console.log("Failed to delete resource board: ", id);
         }

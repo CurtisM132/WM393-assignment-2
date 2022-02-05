@@ -1,6 +1,6 @@
 import { Resource } from "./resource.interface";
 
 export interface BoardResources {
-    id: string
+    id: string // resource board id
     resources: Resource[]
 };
