@@ -31,4 +31,9 @@ describe('ToolbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a title', () => {
+    const title = fixture.nativeElement.querySelector('span');
+    expect(title.textContent).toBe('WMG Teaching Support System (WMGTSS)');
+  });
 });

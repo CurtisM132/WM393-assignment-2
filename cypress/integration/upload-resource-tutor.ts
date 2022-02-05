@@ -26,8 +26,6 @@ describe('Upload Resource', () => {
     })
 
     it('Verifies the correct resource table entry has been created', () => {
-        // Disable file drag and drop zone
-        cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
         // Material table adds padding to text hence the spaces either side of the test text
         cy.get('.mat-row > .cdk-column-name').should('have.text', ' test-image ');
         cy.get('.mat-row > .cdk-column-type').should('have.text', ' IMAGE ');
@@ -35,8 +33,6 @@ describe('Upload Resource', () => {
     })
 
     it('Should allow a resource comment to be set', () => {
-        // Disable file drag and drop zone
-        cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
         cy.get('#resource-comment-input').type('Test comment');
     })
 
