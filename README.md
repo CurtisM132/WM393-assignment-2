@@ -75,7 +75,7 @@
 ### Installation (for development)
 1. Download or clone repository
 2. Run `npm install` in the repository
-3. Run up the app using the development server command listed below
+3. Run up the app using one of the development server commands listed below
 
 
 ### Usage (for development)
@@ -93,7 +93,7 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 #### Running end-to-end tests
-Run `npm run e2e` to execute the end-to-end tests via Cypress.
+Run `npm run e2e` to execute the end-to-end tests via Cypress. Ensure you are not concurrently running a development server.
 
 
 <br />

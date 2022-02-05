@@ -25,12 +25,6 @@ describe('Upload Resource', () => {
         cy.get('#file-upload').attachFile("test-image.jpg");
     })
 
-    it('Should allow a resource comment to be set', () => {
-        // Disable file drag and drop zone
-        cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
-        cy.get('#resource-comment-input').type('Test comment');
-    })
-
     it('Verifies the correct resource table entry has been created', () => {
         // Disable file drag and drop zone
         cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
@@ -38,6 +32,12 @@ describe('Upload Resource', () => {
         cy.get('.mat-row > .cdk-column-name').should('have.text', ' test-image ');
         cy.get('.mat-row > .cdk-column-type').should('have.text', ' IMAGE ');
         cy.get('.mat-row > .cdk-column-fileFormat').should('have.text', ' JPG ');
+    })
+
+    it('Should allow a resource comment to be set', () => {
+        // Disable file drag and drop zone
+        cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
+        cy.get('#resource-comment-input').type('Test comment');
     })
 
     it('Verifies that the image is displayed when the resource entry is clicked', () => {
@@ -51,6 +51,7 @@ describe('Upload Resource', () => {
 
         // Disable file drag and drop zone
         cy.get('.dropzone').trigger('mousemove', { which: 1, pageX: 600, pageY: 100 });
+        // Check we are looking at the resource board and it's displaying correctly
         cy.get('.mat-row > .cdk-column-name').should('have.text', ' test-image ');
     })
 })

@@ -7,8 +7,8 @@ before(() => {
 });
 
 // Runs through the process of viewing an image and a video resource
-describe('Upload Resource', () => {
-    it('Should navigate to an empty resource board', () => {
+describe('View Resources', () => {
+    it('Should navigate to a populated resource board', () => {
         cy.get('.module-cards-container > :nth-child(1)').click();
         cy.get('.function-cards-container > :nth-child(6)').click();
         cy.get('.mat-selection-list > :nth-child(1)').click();
