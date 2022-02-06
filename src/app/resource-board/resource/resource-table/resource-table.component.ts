@@ -4,7 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Resource } from '../shared/resource.interface';
-import { AbstractAuthenticationService } from '../../../authentication/authentication.abstract.service';
 
 @Component({
   selector: 'app-resource-table',
@@ -14,13 +13,14 @@ import { AbstractAuthenticationService } from '../../../authentication/authentic
 export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @Input() resources: Observable<Resource[]>;
+  @Input() displayDeleteButton: boolean = false;
+  @Input() canEditComment: boolean = false;
 
   @Output() resourceClickedEvent = new EventEmitter<Resource>();
   @Output() deleteResourceEvent = new EventEmitter<string>();
 
   @ViewChild(MatSort) sort: MatSort;
 
-  public isTutor: boolean = false;
   public readonly columns = [
     {
       columnDef: 'name',
@@ -49,9 +49,7 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
 
   private destroyed$: Subject<void> = new Subject<void>();
 
-  constructor(
-    private authenticationService: AbstractAuthenticationService,
-  ) { }
+  constructor() { }
 
   ngAfterViewInit(): void {
     if (this.sort) {
@@ -60,20 +58,9 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    // Get whether or not the user is a tutor
-    this.authenticationService.haveRoles$
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(haveRoles => {
-        if (haveRoles) {
-          this.isTutor = this.authenticationService.isTutor();
-          // If the user is a tutor then enable the delete column (the delete row button)
-          if (this.isTutor) {
-            this.displayedColumns.push('delete');
-          }
-        } else {
-          this.isTutor = false;
-        }
-      });
+    if (this.displayDeleteButton) {
+      this.displayedColumns.push('delete');
+    }
 
     this.resources.subscribe(resources => {
       this.dataSource.data = resources;

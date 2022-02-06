@@ -14,11 +14,11 @@
       Comment
     </th>
     <td mat-cell *matCellDef="let row">
-      <div *ngIf="!isTutor">
+      <div *ngIf="!canEditComment">
         {{row.comment}}
       </div>
 
-      <div *ngIf="isTutor">
+      <div *ngIf="canEditComment">
         <mat-form-field class="comment-form-field" appearance="outline" (click)="$event.stopPropagation()">
           <input matInput id="resource-comment-input" type="text" autocomplete="off" [(ngModel)]="row.comment">
         </mat-form-field>

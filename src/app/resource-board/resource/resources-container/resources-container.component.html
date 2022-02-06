@@ -1,4 +1,4 @@
-<app-resource-table [resources]="resources$" (resourceClickedEvent)="handleResourceClicked($event)"
+<app-resource-table [resources]="resources$" [displayDeleteButton]="isTutor" [canEditComment]="isTutor" (resourceClickedEvent)="handleResourceClicked($event)"
     (deleteResourceEvent)="deleteResource($event)"></app-resource-table>
 
 <app-file-upload *ngIf="isTutor" [displayUploadButton]="resources.length <= 0" (filesDroppedEvent)="handleFilesDropped($event)"></app-file-upload>
