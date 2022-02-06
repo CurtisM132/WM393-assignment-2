@@ -21,8 +21,6 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
   @ViewChild(MatSort) sort: MatSort;
 
   public isTutor: boolean = false;
-
-  public dataSource = new MatTableDataSource<Resource>();
   public readonly columns = [
     {
       columnDef: 'name',
@@ -47,7 +45,9 @@ export class ResourceTableComponent implements AfterViewInit, OnInit, OnDestroy 
   ];
   public readonly displayedColumns = [...this.columns.map(c => c.columnDef), "comment"];
 
-  public destroyed$: Subject<void> = new Subject<void>();
+  private dataSource = new MatTableDataSource<Resource>();
+
+  private destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
     private authenticationService: AbstractAuthenticationService,

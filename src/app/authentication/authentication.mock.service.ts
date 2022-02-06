@@ -18,6 +18,10 @@ export class MockAuthenticationService extends AbstractAuthenticationService {
     this.haveRoles$ = new BehaviorSubject<boolean>(true);
   }
 
+  public login(): void {
+    this.loggedIn$.next(true);
+  }
+
   public logout(): void {
     this.loggedIn$.next(false);
   }

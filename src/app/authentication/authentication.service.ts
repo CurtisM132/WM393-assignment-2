@@ -58,6 +58,9 @@ export class AuthenticationService extends AbstractAuthenticationService {
     }, KEYCLOAK_POLL_RATE)
   }
 
+  // Due to the way Keycloak is being used (i.e., login-required before using the website) a login function is not needed
+  public login(): void { }
+
   public logout(): void {
     this.keycloakService.logout();
     this.loggedIn$.next(false);

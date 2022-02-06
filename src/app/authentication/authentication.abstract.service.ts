@@ -16,6 +16,7 @@ export abstract class AbstractAuthenticationService {
 
   public haveRoles$: BehaviorSubject<boolean>;
 
+  public abstract login(): void;
   public abstract logout(): void;
   public abstract isTutor(): boolean;
   public abstract isStudent(): boolean;

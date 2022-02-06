@@ -23,7 +23,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
   public resources: Resource[] = [];
   public resources$: BehaviorSubject<Resource[]> = new BehaviorSubject<Resource[]>([]);
 
-  public destroyed$: Subject<void> = new Subject<void>();
+  private destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -73,7 +73,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getResources(): void {
+  private getResources(): void {
     this.resourceService.getResources(this.resourceBoardId)
       .subscribe((resources) => {
         if (resources) {
@@ -85,7 +85,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
       })
   }
 
-  public downloadResource(resource: Resource): void {
+  private downloadResource(resource: Resource): void {
     if (resource.id) {
       this.resourceService.downloadResource(this.resourceBoardId, resource.id)
         .subscribe((success: boolean) => {
@@ -113,7 +113,7 @@ export class ResourcesContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public uploadResource(file: FileHandle): void {
+  private uploadResource(file: FileHandle): void {
     const fileName = file.file.name.split(".")[0];
     const fileExt = file.file.name.split(".")[1];
 

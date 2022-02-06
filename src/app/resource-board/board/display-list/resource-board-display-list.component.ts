@@ -20,7 +20,7 @@ export class ResourceBoardDisplayListComponent implements OnInit {
   public isTutor: boolean = false;
   public selectedOptions: ResourceBoardSummary[] = [];
 
-  public destroyed$: Subject<void> = new Subject<void>();
+  private destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
     private authenticationService: AbstractAuthenticationService,

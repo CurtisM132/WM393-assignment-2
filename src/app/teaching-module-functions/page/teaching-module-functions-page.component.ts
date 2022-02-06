@@ -7,9 +7,6 @@ import { TEACHING_MODULE_FUNCTIONS, teachingModuleFunctionToMaterialIcon } from 
 import { AbstractAuthenticationService } from '../../authentication/authentication.abstract.service';
 
 
-/**
- * TODO
- */
 @Component({
   selector: 'app-teaching-module-functions-page',
   templateUrl: './teaching-module-functions-page.component.html',
@@ -22,7 +19,7 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
   private moduleId: string;
   public moduleFunctions: TEACHING_MODULE_FUNCTIONS[] = [];
 
-  public destroyed$: Subject<void> = new Subject<void>();
+  private destroyed$: Subject<void> = new Subject<void>();
 
   // Needed so the HTML template can access this icon mapping function
   public teachingModuleFunctionToMaterialIcon = teachingModuleFunctionToMaterialIcon;
@@ -65,7 +62,7 @@ export class TeachingModuleFunctionsPageComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
   }
 
-  public getModuleFunctions() {
+  private getModuleFunctions() {
     this.teachingModulesService.getTeachingModule(this.moduleId)
       .subscribe((teachingModule) => {
         if (teachingModule) {

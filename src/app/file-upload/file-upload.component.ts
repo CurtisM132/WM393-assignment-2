@@ -15,14 +15,14 @@ export class FileUploadComponent {
 
   @Input() displayUploadButton?: boolean = false;
 
-  @Output() filesDropped: EventEmitter<FileHandle[]> = new EventEmitter();
+  @Output() filesDroppedEvent: EventEmitter<FileHandle[]> = new EventEmitter();
 
   @ViewChild('FileSelectInputDialog') FileSelectInputDialog: ElementRef;
 
   constructor() { }
 
   public handleFilesDropped(files: FileHandle[]): void {
-    this.filesDropped.emit(files)
+    this.filesDroppedEvent.emit(files)
   }
 
   public handleUploadClick(): void {
@@ -42,7 +42,7 @@ export class FileUploadComponent {
         files.push({ file, plainURI });
       }
       if (files.length > 0) {
-        this.filesDropped.emit(files);
+        this.filesDroppedEvent.emit(files);
       }
     }
   }

@@ -8,7 +8,7 @@ import { FileHandle } from './file-upload.component';
 })
 export class DragAndDropFileDirective {
 
-  @Output() filesDropped: EventEmitter<FileHandle[]> = new EventEmitter();
+  @Output() filesDroppedEvent: EventEmitter<FileHandle[]> = new EventEmitter();
 
   @HostBinding("style.opacity") private opacity = "0";
   @HostBinding("style.pointerEvents") private pointerEvents = "all";
@@ -43,7 +43,7 @@ export class DragAndDropFileDirective {
         files.push({ file, plainURI });
       }
       if (files.length > 0) {
-        this.filesDropped.emit(files);
+        this.filesDroppedEvent.emit(files);
       }
     }
   }

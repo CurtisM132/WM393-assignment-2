@@ -15,11 +15,11 @@ import { ResourceBoardSummary } from '../board/shared/resource-board.interface';
 export class ResourceBoardPageComponent implements OnInit {
 
   public isTutor: boolean = false;
-
-  private moduleId: string;
   public resourceBoards: ResourceBoardSummary[] = [];
 
-  public destroyed$: Subject<void> = new Subject<void>();
+  private moduleId: string;
+
+  private destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,

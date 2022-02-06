@@ -17,7 +17,7 @@ export class TeachingModulesPageComponent implements OnInit {
 
   public teachingModules: TeachingModule[] = [];
 
-  public destroyed$: Subject<void> = new Subject<void>();
+  private destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
     private router: Router,

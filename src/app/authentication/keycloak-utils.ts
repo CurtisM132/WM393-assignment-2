@@ -1,6 +1,6 @@
 import { KeycloakService } from "keycloak-angular";
 
-export const KEYCLOAK_POLL_RATE = 2000;
+export const KEYCLOAK_POLL_RATE = 1000;
 
 export function InitialiseKeycloak(keycloak: KeycloakService) {
   return () =>
